@@ -1,0 +1,89 @@
+.tap-select-background{ background:#ff3366;}
+.tap-noselect-background{ background:#333333; color:#ffffff;}
+.fontsize55{font-size: 0.55rem;}
+.fontsize75{font-size: 0.75rem;}
+.fontsize5{font-size: 0.5rem;}
+.toppadding2{padding-top:0.2rem;}
+.bottompadding2{padding-bottom:0.2rem;}
+.line-height1{ line-height:1;}
+.margin0{ margin:0;}
+.list-bottom-line{ border-bottom:0.07rem solid #d7d7d7;}
+.list-bottom-line:last-child{ border-bottom:none; }
+.marginleft0{ margin-left:0;}
+.paddingtopbottom{ padding:0.5rem 0;}
+.imgwidth{ width:auto; float:left;}
+.redcolor{ color:#FF4045; font-size:0.5rem}
+.delline{text-decoration:line-through;}
+.salenumredcolor{color:#F43837}
+.salenumsize{ font-size:1.1rem;}
+.originalpricecolor,.saleoverinfocolor{ color:#9F9F9F;}
+.originalpricesize,.saleoverinfosize{ font-size:0.4rem;}
+.snapupbt{ border-radius:0.2rem; background:#fe5f5c; color:#fff; height:1rem; width:3rem; font-size:0.55rem; line-height:1rem; text-align:center; margin-top:0.3rem;}
+.snapupbt a{ color:#fff; }
+.saleoutbg{ background:#eeeeee; color:#9a9a9a; }
+.margin-top25{ margin-top:0.25rem;}
+.floatright{ float:right; clear:both; margin-right:0.5rem; text-align:center;}
+.active.selectcolor >span{color:#ff0000;}
+.tab-item.tab-font >span{ font-size:0.7rem; font-family:simhei;}
+.tipinfo{font-size:0.7rem; }
+.tipinforedcolor{color:#FF4045;}
+.tipinfotextright{ text-align:right;}
+.timebg{background:#252525; color:#fff; border-radius:0.2rem;}
+.buttons-tab .bordernone{ border:0; font-size:0.6rem;color:#fff}
+.buttons-tab .bordernone.active{ color:#fff;background:#ff3366; }
+.content-block.margin0padding0,ul ul.margin0padding0{ margin:0;padding:0;}
+.tapvmiddle{ margin-top:3%;}
+.process{ border:1px solid #ef383a; border-radius:0.2rem; background:#fdb7b5;position:relative; width:30%; height:0.5rem; color:#fff; font-size:0.15rem;}
+.processprecent{ background:#ef383a; width:78%; height:0.45rem; float:left; border-top-left-radius:0.2rem; border-bottom-left-radius:0.2rem; }
+.showprecessnum{ width:100%; height:100%; position:absolute; line-height:1; text-align:center;}
+.title{ font-family:simhei;}
+.remind{  border-radius:0.2rem; color:#fff; height:1rem; width:3rem; font-size:0.55rem; line-height:1rem; text-align:center; margin-top:0.3rem;background:#51b946;}
+.remind a{ color:#fff;}
+.remindcolor{color:#9F9F9F; font-size:0.5rem}
+.tostartpricesize{ font-size:1.6rem;}
+.tostartoriginpricesize{ font-size:0.7rem;}
+.grid1{ padding:0.25rem 0.1rem;}
+.item-after.flexshrink1{flex-shrink:1; -webkit-flex-shrink:1;white-space:normal; overflow:visible; ;box-flex:1;-webkit-box-flex:1;}
+.item-title.indexbranch{ flex-shrink:1; -webkit-flex-shrink:1; overflow:visible;}
+.backgroundeee{ background:#eee;}
+.item-input a{ color:#3d4145; padding-left: 0.25rem;}
+.item-content .item-inner.displaycss{ display: -webkit-box  ; display: -webkit-flex ;display: flex; margin-left:0;}
+.item-content .item-inner.displaycss a{ border-radius:0;}
+.redcolor{ color:red;}
+.padding1rem{ padding:0.001rem 0; -webkit-margin-before: 0.33em;-webkit-margin-after: 0.33em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;}
+.bgff6600{ background:#ff6600; color:#ffffff;}
+.bgfff{ background:#ffffff;}
+.button-normal {
+  border-color: #ccebf8;
+  color: #4cd964;
+}
+.button-normal.button-fill {
+  color: white;
+  background-color: #ccebf8;
+}
+.row.marginupdown{ margin-top:.6rem; margin-bottom:.6rem; padding-top:0.6rem; padding-bottom:0.6rem;}
+.colorgoing{ color:#09cd09;}
+.colorend{ color:#ff0202;}
+.color575757{ color:#575757;}
+.item-inner .noline:after{   content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  top: auto;
+  height: 1px;
+  width: 100%;
+  background-color: #fff !important;
+  display: block;
+  z-index: 15;
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;}
+.overflowhidden{ overflow:hidden;}
+.list-block .item-media + .marginleft04{ margin-left:0.4rem; }
+.boxflex1{ box-flex:1; -webkit-box-flex:1; font-size:0.75rem}
+.backgroundzindex .button{ background:#fff; z-index:50}
+.list-block.media-list.pull-to-refresh-content{ margin-top:-2.2rem;}
+.list-block .item-media + .marginleft0{ margin-left:0;}
+.item-inner.displaycss .item-after{ margin-left:0;}
+.goods-list .item-content{ padding-left:0.4rem;}
+.goods-list .buttons-row{ margin:0;}

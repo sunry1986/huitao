@@ -1,0 +1,303 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+<link rel="stylesheet" href="iconfont.css" >
+<link rel="stylesheet" href="mycss.css" >
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+
+</head>
+
+<body>
+
+<div class="page" external>
+    <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
+              <span class="icon icon-left"></span>
+              返回
+            </a>
+            <a class="button button-link button-nav pull-right" href="/demos/card" data-transition='slide-out'>
+              <span class="icon iconfont icon-close"></span>
+            </a>
+            <a class="button button-link button-nav pull-right" href="/demos/card" data-transition='slide-out'>
+              <span class="icon icon-refresh"></span>  
+            </a>
+         
+            <h1 class="title">惠淘无线</h1>
+      </header>
+      <nav class="bar bar-tab">
+        <a class="tab-item active selectcolor tab-font" href="#timelimit" external>
+          <span class="icon icon-home"></span>
+          <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item tab-font" href="#myremind" external>
+          <span class="icon icon-app"></span>
+          <span class="tab-label">返回</span>
+        </a>
+ 		<a class="tab-item tab-font" href="#myremind" external >
+          <span class="icon icon-me"></span>
+          <span class="tab-label">保存并推广</span>
+        </a>
+      </nav>
+	<div class="content" data-type='native'>
+    <div class=" list-block content-inner" >
+    <ul>
+      <li class="backgroundeee"> <div class="item-content"><div class="item-inner"><div class="item-title label">活动设置</div></div></div></li>
+      <!-- Text inputs -->
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动名称</div>
+            <div class="item-input">
+              <input type="text" placeholder="活动名称">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-email"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">开始时间</div>
+            <div class="item-input">
+              <input type="date" placeholder="开始时间">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束时间</div>
+            <div class="item-input">
+              <input type="date" placeholder="结束时间" class="">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="align-top">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-comment"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动备注</div>
+            <div class="item-input">
+              <textarea></textarea>
+            </div>
+          </div>
+        </div>
+      </li>
+     <li class="backgroundeee">
+     	<div class="item-content">
+        	<div class="item-inner">
+            	<div class="item-title label">奖项设置</div>
+                <p class='boxflex1'>建议卖家设置流量赠送，促进用户通过领取流量的方式促进成交。建议最多只设置3种类型，供买家选择</p>
+            </div>
+        </div>
+     </li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">是否展示赠流量</div>
+            <div class="item-input">
+              <select>
+                <option>是</option>
+                <option>否</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li>
+    
+      <li>
+        <div class="item-content getop1">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">领取条件</div>
+            <div class="item-input">
+             <select>
+                <option>收藏店铺</option>
+                <option>否</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li>
+      <script>
+	  var s=$(".getop1")
+	 
+      $(".ifshowdiscount").find("select").first().bind('change',function(){
+		  console.log(this.value);
+		  if(this.value=='是'){
+			  console.log(123123,s);
+			 	$(".getop1").css('display','')
+			  }else{
+				   $(".getop1").css('display','none')
+
+				  }
+		  });
+      </script>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">流量设置</div>
+            <div class="item-input">
+             <select>
+                <option>2M/人</option>
+                <option>3M/人</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="backgroundeee">
+     	<div class="item-content">
+        	<div class="item-inner">
+            	<div class="item-title label">宝贝设置</div>
+                <p class='boxflex1'>建议限时抢购只设置7天以内，防止买家抢购疲劳，下次活动可以重新设置。</p>
+            </div>
+        </div>
+     </li>
+     <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动banner</div>
+            <div class="item-input">
+              <input type="text" placeholder="非必填，可以使用默认banner">
+            </div>
+          </div>
+        </div>
+      </li>
+      
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">限时开始</div>
+            <div class="item-input">
+              <input type="text" id='startdatetime-picker'/>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">限时结束</div>
+            <div class="item-input">
+              <input type="text" id='enddatetime-picker'/>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动宝贝</div>
+            <div class="item-input">
+             <a href="goods.html" class="">已选择5件宝贝</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">主推宝贝</div>
+            <div class="item-input">
+             <a href="goods.html" class="">已选择5件宝贝</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      
+    </ul>
+    <script src="picker.js" type='text/javascript' charset='utf-8'></script>
+  </div>
+  
+  </div>
+ </div>
+    
+<textarea class="saveaddtime"><li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">限时开始</div>
+            <div class="item-input">
+              <input type="text" id='startdatetime-picker'/>
+					
+					
+                    
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">主推宝贝</div>
+            <div class="item-input">
+             <a href="" class="">已选择5件宝贝</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束控制</div>
+            <div class="item-input">
+             <select>
+                <option>按截止时间到达</option>
+                <option>手动调整</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li><li  class="timeintervalli li1"><div class="item-content"><div class="item-inner"><div class="item-input"><a href="#" class="button">删除</a></div></div></div></li></textarea>
+<!--调试引用-->
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+<script type="text/javascript" src="sm-time-picker.js"></script>
+<script type="text/javascript" src="sm-city-picker.js" charset='utf-8'></script>
+<script>
+$('.addnewtimeinterval').bind('click',function(){
+	var n=($('.timeintervalli').length+1)/4||1;
+	$('.timeintervalli').parent().append($('.saveaddtime').text().replace(/li1/g,'li'+n).replace('datetime-picker','datetime-picker'+n));
+	  
+	$('#datetime-picker'+n).datetimePickerDuan({
+      value: getDateArr()
+    });
+	$('.li'+n).find('.button').bind('click',function(){
+		$('.'+$(this).parents('li').attr('class').split(' ')[1]).remove();
+		});
+	})
+	
+	
+	
+</script>
+</body>
+</html>
