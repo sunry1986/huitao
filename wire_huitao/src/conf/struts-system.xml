@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   
+	<package name="dsqAction" extends="json-default" namespace="/sys">  
+	
+        <global-results>
+           <result name="errorPage">/error.html</result>
+        </global-results> 
+		<action name="user" class="com.huitao.dsq.action.UserAction">
+ 			<result type="json"></result>
+ 			<result name="admin_index" type="redirect">/pages/html/admin_index.html</result>
+		</action>
+		<action name="activity" class="com.huitao.dsq.action.ActivityAction">
+ 			<result type="json" name="json"></result>
+		</action>
+		<action name="activitylog" class="com.huitao.dsq.action.ActivityLogAction">
+ 			<result type="json" name="json"></result>
+		</action>
+		<action name="items" class="com.huitao.dsq.action.ItemAction">
+ 			<result type="json" name="json"></result>
+		</action>
+    </package>
+    <package name="loginAction" extends="json-default" namespace="/login">  
+	
+        <global-results>
+           <result name="errorPage">/error.html</result>
+        </global-results> 
+		<action name="user" class="com.huitao.dsq.action.UserAction">
+ 			<result type="json"></result>
+ 			<result name="admin_index" type="redirect">/waiting.html</result>
+		</action>
+		<action name="activity" class="com.huitao.dsq.action.ActivityAction">
+ 			<result type="json"></result>
+		</action>
+		<action name="activitylog" class="com.huitao.dsq.action.ActivityLogAction">
+ 			<result type="json" name="json"></result>
+		</action>
+		<action name="client" class="com.huitao.dsq.action.clientAction">
+ 			<result type="json" name="json"></result>
+		</action>
+    </package>
+    <package name="clientAction" extends="json-default" namespace="/client">  
+        <global-results>
+           <result name="errorPage">/error.html</result>
+        </global-results> 
+		<action name="client" class="com.huitao.dsq.action.clientAction">
+ 			<result type="json" name="json"></result>
+		</action>
+    </package>
+
+</struts>

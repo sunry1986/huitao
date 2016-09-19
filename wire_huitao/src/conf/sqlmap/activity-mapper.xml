@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huitao.dsq.dao.ActivityDao">
+	<resultMap type="activity" id="activityResultMap">
+		<result property="actId" column="actId" />
+		<result property="sellerNick" column="sellerNick" />
+		<result property="actType" column="actType" />
+		<result property="actName" column="actName" />
+		<result property="actStart" column="actStart" />
+		<result property="actEnd" column="actEnd" />
+		<result property="actRemark" column="actRemark" />
+		<result property="couponShow" column="couponShow" />
+		<result property="couponReceivingConditions" column="couponReceivingConditions" />
+		<result property="coupons" column="coupons" />
+		<result property="banner" column="banner" />
+		<result property="state" column="state" />
+		<result property="qrcode" column="qrcode" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+	<select id="selectActivity" resultType="com.huitao.dsq.bean.Activity"> 
+        <![CDATA[
+            select actId,sellerNick,actType,actName,actStart,actEnd,actRemark,couponShow,couponReceivingConditions,coupons,banner,state,qrcode,createTime from activity where actId=#{id}
+        ]]>
+	</select>
+	<insert id="addActivity" parameterType="com.huitao.dsq.bean.Activity">
+		<![CDATA[
+			insert into activity(sellerNick,actType,actName,actStart,actEnd,actRemark,couponShow,couponReceivingConditions,coupons,banner,state,qrcode,createTime) 
+				values (#{sellerNick},#{actType},#{actName},#{actStart},#{actEnd},#{actRemark},#{couponShow},#{couponReceivingConditions},#{coupons},#{banner},#{state},#{qrcode},#{createTime})
+		]]>
+		<selectKey resultType="java.lang.Long" keyProperty="actId">
+			SELECT
+			@@IDENTITY AS actId
+		</selectKey>
+	</insert>
+	<delete id="deleteActivity" parameterType="com.huitao.dsq.bean.Activity"> 
+        <![CDATA[
+            delete from activity where actId=#{actId} and sellerNick=#{sellerNick}
+        ]]>
+	</delete>
+	<delete id="deleteActivityDetailByActId" parameterType="com.huitao.dsq.bean.Activity"> 
+        <![CDATA[
+            delete from   activity_detail where actDetailId in(select actId from activity where actId=#{actId} and sellerNick=#{sellerNick});
+        ]]>
+	</delete>
+	<delete id="deleteActivityGoodDetailByActId" parameterType="com.huitao.dsq.bean.Activity"> 
+        <![CDATA[
+            delete from  activity_good_detail where actDetailId in(select actDetailId  from  activity_detail where actDetailId in(select actId from activity where actId=#{actId} and sellerNick=#{sellerNick}));
+        ]]>
+	</delete>
+	<update id="updateActivity" parameterType="com.huitao.dsq.bean.Activity">
+		update activity 
+		<set>
+		    <if test="sellerNick != null">
+		        sellerNick=#{sellerNick},
+		    </if>
+		    <if test="actType != null">
+		        actType=#{actType},
+		    </if>
+		    <if test="actName != null">
+		         actName=#{actName},
+		    </if>
+		    <if test="actStart != null">
+		         actStart=#{actStart},
+		    </if>
+		    <if test="actEnd != null">
+		         actEnd=#{actEnd},
+		    </if>
+		    <if test="actRemark != null">
+		         actRemark=#{actRemark},
+		    </if>
+		    <if test="couponShow != null">
+		         couponShow=#{couponShow},
+		    </if>
+		    <if test="couponReceivingConditions!=null">
+		         couponReceivingConditions=#{couponReceivingConditions},
+		    </if>
+		    <if test="coupons != null">
+		         coupons=#{coupons},
+		    </if>
+		    <if test="banner != null">
+		         banner=#{banner},
+		    </if>
+		    <if test="state != null">
+		         state=#{state}
+		    </if>
+		    <if test="qrcode != null">
+		         qrcode=#{qrcode}
+		    </if>
+		</set>
+		 where  actId=#{actId} and sellerNick=#{sellerNick}
+	</update>
+	<select id="selectActivityList" parameterType="com.huitao.dsq.bean.Activity"
+		resultMap="activityResultMap">
+<!-- 		 <![CDATA[ -->
+<!--             select actId,sellerNick,actType,actName,actStart,actEnd,actRemark,couponShow,couponReceivingConditions,coupons,banner,state from activity where sellerNick=#{sellerNick} -->
+<!--         ]]> -->
+        select actId,sellerNick,actType,actName,actStart,actEnd,actRemark,couponShow,couponReceivingConditions,coupons,banner,state,qrcode,createTime from activity
+        <where>
+             <if test="sellerNick != null" >
+                 and sellerNick=#{sellerNick}
+             </if>
+             <if test="state != null" >
+                 and state=#{state}
+             </if>
+        </where>
+        order by state asc, actStart desc
+	</select>
+</mapper>

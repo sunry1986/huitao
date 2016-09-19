@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huitao.dsq.dao.ActivityGoodDetailDao">
+   <resultMap type="activityGoodDetail" id="activityGoodDetailResultMap" > 
+        <result property="id" column="id"/> 
+        <result property="actDetailId" column="actDetailId"/> 
+        <result property="pic_url" column="pic_url"/> 
+        <result property="oldNum" column="oldNum" /> 
+        <result property="currentNum" column="currentNum"/>
+        <result property="title" column="title"/>
+        <result property="detailUrl" column="detailUrl"/> 
+        <result property="price" column="price"/> 
+        <result property="activityPrice" column="activityPrice"/> 
+        <result property="type" column="type"/> 
+        <result property="isSaleOut" column="isSaleOut"/> 
+        <result property="overWay" column="overWay"/>
+        <result property="numiid" column="numiid"/> 
+    </resultMap> 
+    <select id="selectActivityGoodDetail"  resultType="com.huitao.dsq.bean.ActivityGoodDetail"> 
+        <![CDATA[
+            select id,actDetailId,pic_url,oldNum,currentNum,title,detailUrl,price,activityPrice,type,isSaleOut,overWay,numiid from activity_good_detail where id=#{id}
+        ]]>  
+    </select> 
+   <insert id="addActivityGoodDetail"  parameterType="com.huitao.dsq.bean.ActivityGoodDetail" >
+		<![CDATA[
+			insert into activity_good_detail(actDetailId,pic_url,oldNum,currentNum,title,detailUrl,price,activityPrice,type,isSaleOut,overWay,numiid) 
+				values (#{actDetailId},#{pic_url},#{oldNum},#{currentNum},#{title},#{detailUrl},#{price},#{activityPrice},#{type},#{isSaleOut},#{overWay},#{numiid})
+		]]>
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+	          SELECT @@IDENTITY AS id
+	     </selectKey>
+	</insert>
+	<delete id="deleteActivityGoodDetail" parameterType="com.huitao.dsq.bean.ActivityGoodDetail" > 
+        <![CDATA[
+            delete from activity_good_detail where actDetailId=#{actDetailId} and id=#{id}
+        ]]>  
+    </delete> 
+    <update id="updateActivityGoodDetail" parameterType="com.huitao.dsq.bean.ActivityGoodDetail" >
+        update activity_good_detail
+        <set> 
+            <if test="actDetailId != null">
+		        actDetailId=#{actDetailId},
+		    </if>
+		    <if test="pic_url != null">
+		        pic_url=#{pic_url},
+		    </if>
+		    <if test="oldNum != null">
+		        oldNum=#{oldNum},
+		    </if>
+		    <if test="currentNum != null">
+		        currentNum=#{currentNum},
+		    </if>
+		    <if test="title != null">
+		        title=#{title},
+		    </if>
+		    <if test="detailUrl != null">
+		        detailUrl=#{detailUrl},
+		    </if>
+		    <if test="price != null">
+		        price=#{price},
+		    </if>
+		    <if test="activityPrice != null">
+		        activityPrice=#{activityPrice},
+		    </if>
+		    <if test="type != null">
+		        type=#{type},
+		    </if>
+		    <if test="isSaleOut != null">
+		        isSaleOut=#{isSaleOut},
+		    </if>
+		    <if test="overWay != null">
+		        overWay=#{overWay},
+		    </if>
+		    <if test="numiid != null">
+		        numiid=#{numiid},
+		    </if>
+        </set>
+        where  id=#{id} and actDetailId=#{actDetailId} 
+	</update>
+    <select id="selectActivityGoodDetailList" parameterType="com.huitao.dsq.bean.ActivityGoodDetail"  resultMap="activityGoodDetailResultMap">
+		 <![CDATA[
+             select id,actDetailId,pic_url,oldNum,currentNum,title,detailUrl,price,activityPrice,type,isSaleOut,overWay,numiid from activity_good_detail where actDetailId=#{actDetailId}
+        ]]>  
+	</select>
+	<select id="selectActivityGoodDetailListByActDetailId" resultMap="activityGoodDetailResultMap">
+		 <![CDATA[
+             select id,actDetailId,pic_url,oldNum,currentNum,title,detailUrl,price,activityPrice,type,isSaleOut,overWay,numiid from activity_good_detail where actDetailId in(select actDetailId  from  activity_detail where actDetailId =#{actDetailId});
+        ]]>  
+	</select>
+</mapper>

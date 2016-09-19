@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huitao.dsq.dao.ActivityLogDao">
+	<resultMap type="activityLog" id="activityLogResultMap">
+		<result property="logId" column="logId" />
+		<result property="activityId" column="activityId" />
+		<result property="buyerNick" column="buyerNick" />
+		<result property="activityCondition" column="activityCondition" />
+		<result property="creatTime" column="creatTime" />
+		<result property="sellerNick" column="sellerNick" />
+		<result property="liuLiangcount" column="liuLiangcount" />
+	</resultMap>
+	<select id="selectActivityLog" resultType="com.huitao.dsq.bean.ActivityLog"> 
+        <![CDATA[
+            select logId,activityId,buyerNick,activityCondition,creatTime,sellerNick,liuLiangcount from activity_log where logId=#{logId}
+        ]]>
+	</select>
+	<insert id="addActivityLog" parameterType="com.huitao.dsq.bean.ActivityLog">
+		<![CDATA[
+			insert into activity_log(activityId,buyerNick,activityCondition,creatTime,sellerNick,liuLiangcount) 
+				values (#{activityId},#{buyerNick},#{activityCondition},#{creatTime},#{sellerNick},#{liuLiangcount})
+		]]>
+		<selectKey resultType="java.lang.Long" keyProperty="logId">
+			SELECT
+			@@IDENTITY AS logId
+		</selectKey>
+	</insert>
+	<delete id="deleteActivityLog" parameterType="com.huitao.dsq.bean.ActivityLog"> 
+        <![CDATA[
+            delete from activity_log where logId=#{logId} and activityId=#{activityId}
+        ]]>
+	</delete>
+	<update id="updateActivityLog" parameterType="com.huitao.dsq.bean.ActivityLog">
+		update activity_log 
+		<set>
+		    <if test="buyerNick != null">
+		        buyerNick=#{buyerNick},
+		    </if>
+		    <if test="activityCondition != null">
+		        activityCondition=#{activityCondition},
+		    </if>
+		    <if test="creatTime != null">
+		         creatTime=#{creatTime},
+		    </if>
+		</set>
+		 where  logId=#{logId} and activityId=#{activityId}
+	</update>
+	<select id="selectActivityLogList" parameterType="com.huitao.dsq.bean.ActivityLog"
+		resultMap="activityLogResultMap">
+        select logId,activityId,buyerNick,activityCondition,creatTime,sellerNick,liuLiangcount from activity_log
+        <where>
+             <if test="activityId != null" >
+                 and activityId=#{activityId}
+             </if>
+             <if test="sellerNick != null" >
+                 and sellerNick=#{sellerNick}
+             </if>
+             <if test="buyerNick != null" >
+                 and buyerNick=#{buyerNick}
+             </if>
+             <if test="activityCondition != null" >
+                 and activityCondition=#{activityCondition}
+             </if>
+        </where>
+	</select>
+	<select id="findLogCount"  parameterType="com.huitao.dsq.bean.ActivityLog" resultType="Integer">
+	      select count(1) from activity_log
+	       <where>
+             <if test="activityId != null" >
+                 and activityId=#{activityId}
+             </if>
+             <if test="sellerNick != null" >
+                 and sellerNick=#{sellerNick}
+             </if>
+             <if test="buyerNick != null" >
+                 and buyerNick=#{buyerNick}
+             </if>
+             <if test="activityCondition != null" >
+                 and activityCondition=#{activityCondition}
+             </if>
+           </where>
+	</select>
+</mapper>

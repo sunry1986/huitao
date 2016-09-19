@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 类别名配置 -->
+	<typeAliases> 
+        <typeAlias alias="user" type="com.huitao.dsq.bean.UserInfo"/> 
+        <typeAlias alias="activity" type="com.huitao.dsq.bean.Activity"/>
+        <typeAlias alias="activityDetail" type="com.huitao.dsq.bean.ActivityDetail"/>
+        <typeAlias alias="activityGoodDetail" type="com.huitao.dsq.bean.ActivityGoodDetail"/> 
+        <typeAlias alias="activityLog" type="com.huitao.dsq.bean.ActivityLog"/>
+    </typeAliases>
+	<mappers>
+		<mapper resource="conf/sqlmap/user-mapper.xml" />
+		<mapper resource="conf/sqlmap/activity-mapper.xml" />
+		<mapper resource="conf/sqlmap/activityDetail-mapper.xml" />
+		<mapper resource="conf/sqlmap/activityGoodDetail-mapper.xml" />
+		<mapper resource="conf/sqlmap/activityLog-mapper.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huitao.dsq.dao.ActivityDetailDao">
+   <resultMap type="activityDetail" id="activityDetailDaoResultMap" > 
+        <result property="actDetailId" column="actDetailId"/> 
+        <result property="actId" column="actId"/> 
+        <result property="startTime" column="startTime" /> 
+        <result property="endTime" column="endTime"/>
+    </resultMap> 
+    <select id="selectActivityDetail"  resultType="com.huitao.dsq.bean.ActivityDetail"> 
+        <![CDATA[
+            select actDetailId,actId,startTime,endTime from activity_detail where actDetailId=#{id}
+        ]]>  
+    </select> 
+   <insert id="addActivityDetail"  parameterType="com.huitao.dsq.bean.ActivityDetail" >
+		<![CDATA[
+			insert into activity_detail(actId,startTime,endTime) 
+				values (#{actId},#{startTime},#{endTime})
+		]]>
+		<selectKey resultType="java.lang.Long" keyProperty="actDetailId">
+	          SELECT @@IDENTITY AS actDetailId
+	     </selectKey>
+	</insert>
+	<delete id="deleteActivityDetail" parameterType="com.huitao.dsq.bean.ActivityDetail" > 
+        <![CDATA[
+            delete from activity_detail where actId=#{actId} and actDetailId=#{actDetailId}
+        ]]>  
+    </delete> 
+    <delete id="deleteActivityGoodDetailByActDetailId" parameterType="com.huitao.dsq.bean.ActivityDetail" > 
+        <![CDATA[
+            delete from  activity_good_detail where  actDetailId=#{actDetailId}
+        ]]>  
+    </delete> 
+    <update id="updateActivityDetail" parameterType="com.huitao.dsq.bean.ActivityDetail" >
+		update activity_detail
+		<set>
+		    <if test="actId != null">
+		        actId=#{actId},
+		    </if>
+		    <if test="startTime != null">
+		        startTime=#{startTime},
+		    </if>
+		    <if test="endTime != null">
+		         endTime=#{endTime}
+		    </if>
+		 </set>
+		
+		where  actId=#{actId} and actDetailId=#{actDetailId}
+	</update>
+    <select id="selectActivityDetailList" parameterType="com.huitao.dsq.bean.ActivityDetail"  resultMap="activityDetailDaoResultMap">
+		 <![CDATA[
+           select actDetailId,actId,startTime,endTime from activity_detail where  actId=#{actId}
+        ]]>  
+	</select>
+	<select id="selectActivityDetailListByActId"   resultMap="activityDetailDaoResultMap">
+		 <![CDATA[
+           select actDetailId,actId,startTime,endTime from activity_detail where  actId=#{actId}
+        ]]>  
+	</select>
+</mapper>

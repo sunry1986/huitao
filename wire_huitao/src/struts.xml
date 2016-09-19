@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.multipart.maxSize" value="50000000" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.convention.action.mapallmatches" value="true" />
+	
+	<!-- 包含的配置文件 -->
+	<include file="conf/struts-system.xml"></include>
+</struts>

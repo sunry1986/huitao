@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huitao.dsq.dao.UserDao">
+	
+	<resultMap type="user" id="userResultMap" > 
+        <result property="sellerNick" column="sellerNick"/> 
+        <result property="shopName" column="shopName"/>
+        <result property="shopSid" column="shopName"/>
+        <result property="avatar" column="avatar"/> 
+        <result property="token" column="token"/> 
+        <result property="userId" column="userId"/> 
+    </resultMap> 
+    
+	<!-- 查询列表 --> 
+    <select id="selectByNick"  resultType="com.huitao.dsq.bean.UserInfo"> 
+        <![CDATA[
+            select sellerNick,shopName,avatar,shopSid,token,userId from user_info where sellerNick=#{nick}
+        ]]>  
+    </select> 
+    <insert id="addUserInfo" parameterType="com.huitao.dsq.bean.UserInfo">
+		<![CDATA[
+			insert into user_info(sellerNick,shopName,shopSid,avatar,token,userId) 
+				values (#{sellerNick},#{shopName},#{shopSid},#{avatar},#{token},#{userId})
+		]]>
+	</insert>
+	<update id="updateUserInfo" parameterType="com.huitao.dsq.bean.UserInfo">
+		update user_info 
+		<set>
+		    <if test="sellerNick != null">
+		        sellerNick=#{sellerNick},
+		    </if>
+		    <if test="shopName != null">
+		        shopName=#{shopName},
+		    </if>
+		    <if test="shopSid != null">
+		         shopSid=#{shopSid},
+		    </if>
+		    <if test="avatar != null">
+		         avatar=#{avatar},
+		    </if>
+		    <if test="token != null">
+		         token=#{token},
+		    </if>
+		    <if test="userId != null">
+		         userId=#{userId},
+		    </if>
+		</set>
+		 where  sellerNick=#{sellerNick} 
+	</update>
+</mapper>
