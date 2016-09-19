@@ -1,0 +1,407 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线-全时段限时抢购</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+
+
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+<link rel="stylesheet" href="../css/mycss.css" >
+<link rel="stylesheet" href="../css/sui.css" >
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+
+
+
+
+<script type="text/javascript" src="../js/common.min.js"></script>
+</head>
+
+<body>
+ <div class="page-group">
+<div class="page page-current" id="alltime" external>
+
+      <nav class="bar bar-tab">
+        <a class="tab-item active selectcolor tab-font back " >
+          <span class="icon  icon-left"></span>
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item tab-font saveandrec " href="#" >
+          <span class="icon sui-icon icon-touch-arrow-down-circle"></span>
+          <span class="tab-label">保存</span>
+        </a>
+ 		<a class="tab-item tab-font saveandrec torecommend" href="#"  >
+          <span class="icon sui-icon icon-touch-association2"></span>
+          <span class="tab-label">保存并推广</span>
+        </a>
+      </nav>
+	<div class="content" data-type='native'>
+    <div class=" list-block content-inner" >
+    <form method='post'>
+    <ul>
+      <li class="backgroundeee"> <div class="item-content"><div class="item-inner"><div class="item-title label">活动设置</div></div></div></li>
+      <!-- Text inputs -->
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动名称</div>
+            <div class="item-input">
+              <input type="text" name='actName' placeholder="活动名称">
+              <input type="hidden" name='actId' >
+            </div>
+            <div class='item-after tipscolor actName'></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-email"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">开始时间</div>
+            <div class="item-input">
+              <input type="text" name='actStart'  placeholder="开始时间" class='setstarttime'>
+            </div>
+            <div class='item-after tipscolor actStart'></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束时间</div>
+            <div class="item-input">
+              <input type="text" name='actEnd'  placeholder="结束时间" class='setendtime'>
+            </div>
+            <div class='item-after tipscolor actEnd'></div>
+          </div>
+        </div>
+      </li>
+      <li class="align-top">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-comment"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动备注</div>
+            <div class="item-input">
+              <textarea name="actRemark"></textarea>
+              <div class='fontsize55'>限制50个字符内。</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+     <li class="backgroundeee">
+     <div class="descinfo">
+     	<div class="label titlecolor">奖项设置</div>
+     	<p class=' contentcolor'>一等奖、二等奖、三等奖、优秀奖、谢谢参与、再来一次六种抽奖概率、奖品设置。奖品名称不会在前台显示。</p>
+     </div>
+     </li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">一等奖奖项</div>
+            <div class="item-input">
+              <label class="label-switch">
+                <input type="checkbox"  name='couponShow'>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+    
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label ">奖品份数</div>
+            <div class="item-input">
+             <select name='couponReceivingConditions' dir="rtl">
+                <option value=1 >收藏店铺</option>
+                
+              </select>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+     
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">中奖概率</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">请选择</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+      <li  class="backgroundeee height1rem"></li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">二等奖奖项</div>
+            <div class="item-input">
+              <label class="label-switch">
+                <input type="checkbox"  name='couponShow'>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+    
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label ">奖品份数</div>
+            <div class="item-input">
+             <select name='couponReceivingConditions' dir="rtl">
+                <option value=1 >收藏店铺</option>
+                
+              </select>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+     
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">中奖概率</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">请选择</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+  <li  class="backgroundeee height1rem"></li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">三等奖奖项</div>
+            <div class="item-input">
+              <label class="label-switch">
+                <input type="checkbox"  name='couponShow'>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+    
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label ">奖品份数</div>
+            <div class="item-input">
+             <select name='couponReceivingConditions' dir="rtl">
+                <option value=1 >收藏店铺</option>
+                
+              </select>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+     
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">中奖概率</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">请选择</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+       <li  class="backgroundeee height1rem"></li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">谢谢参与奖项</div>
+            <div class="item-input">
+              <label class="label-switch">
+                <input type="checkbox"  name='couponShow'>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+    
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label ">奖品份数</div>
+            <div class="item-input">
+             <select name='couponReceivingConditions' dir="rtl">
+                <option value=1 >收藏店铺</option>
+                
+              </select>
+            </div>
+            <div class='item-after'></div>
+          </div>
+        </div>
+      </li>
+     
+      <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">中奖概率</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">请选择</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+     <li class="backgroundeee">
+     <div class="descinfo">
+     	<div class="label titlecolor">规则设置</div>
+     	<p class=' contentcolor'>抽奖规则设置</p>
+     </div>
+     </li>
+     <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">每人免费抽奖</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">2次</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+           <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">收藏店铺抽奖</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">2次</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+           <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">分享活动抽奖</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">2次</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+           <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">每人最多抽奖</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">2次</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+           <li class='getop1'>
+        <div class="item-content ">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">每人每天中奖</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">2次</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+            <div class='item-after '></div>
+          </div>
+        </div>
+      </li>
+    
+      
+    </ul>
+    </form>
+    <script src="../js/picker.min.js" type='text/javascript' charset='utf-8'></script>
+  </div>
+  
+  </div>
+ </div>
+
+
+    
+
+
+
+<!--调试引用-->
+
+
+ </div>   
+
+
+
+
+
+ </div>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+
+ 
+<script type="text/javascript" src="../js/apitoserver.js"></script>
+<script type="text/javascript" src="../js/sm-time-picker.js"></script>
+<script type="text/javascript" src="../js/sm-city-picker.js" charset='utf-8'></script>
+
+ 
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>流量设置</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+<link rel="stylesheet" href="../icon/css/font.css" >
+<link rel="stylesheet" href="../css/mycss.css" >
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+<script type="text/javascript" src="../js/common.js"></script>
+
+</head>
+
+<body>
+
+<div class="page page-current external" id="actiondetail">
+
+      <nav class="bar bar-tab">
+        <a class="tab-item  tab-font" href="#timelimit" external>
+          <span class="icon icon-home"></span>
+          <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item active selectcolor tab-font" href="#myremind" external>
+          <span class="icon icon-app"></span>
+          <span class="tab-label">活动</span>
+        </a>
+ 		<a class="tab-item tab-font" href="#myremind" external >
+          <span class="icon icon-me"></span>
+          <span class="tab-label">我的店铺</span>
+        </a>
+      </nav>
+      <div class="content active" >
+        <!-- 这里是页面内容区 -->
+        <div class="">
+          <h4 class="descinfo margin0 margin-top1">流量设置</h4>
+           <div class="list-block margin0 margin-top25">
+                <ul>
+                  <!-- Text inputs -->
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-name"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">每人领取流量（M）</div>
+                        <div class="item-input">
+                          <input type="number" name='actName' placeholder="每人领取流量" >
+                          <input type="hidden" name='actId' >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-email"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">每人领取次数</div>
+                        <div class="item-input">
+                          <input type="number" name='actStart' data-toggle='date' placeholder="开始时间"  >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">领取总次数限制</div>
+                        <div class="item-input">
+                          <input type="number" name='actEnd'   placeholder="结束时间" >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li class="align-top">
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">活动准备</div>
+                        <div class="item-input">
+                          <textarea name="actRemark" readonly></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            	<div class="content-block">
+				    <div class="row">
+				      <div class="col-50"><a href="#" class="button button-big button-fill button-danger">取消</a></div>
+				      <div class="col-50"><a href="#" class="button button-big button-fill button-success">保存</a></div>
+				    </div>
+				  </div>
+				               
+				 
+                
+              </div>
+                        
+        
+        </div>
+      </div>
+    </div>
+    
+
+<!--调试引用-->
+
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+<script type="text/javascript" src="../js/sm-time-picker.js"></script>
+<script type="text/javascript" src="../js/sm-city-picker.js" charset='utf-8'></script>
+<script type="text/javascript" src="../js/apitoserver.js"></script>
+<script type="text/javascript">
+var urlobj=common.urlSearch();
+var params5={
+		'actId':urlobj.actId
+	}
+//单个活动查询
+var getfulldata;
+API.base('/sys/activity!findActivityById.action',params5 , function(rsp){
+	console.log(rsp);
+	if(rsp.success==true){
+		var data=rsp.data;
+		if(data.activity){
+			
+			data=data.activity;
+			getfulldata=data;
+			$('input[name="actId"]').val(data.actId);
+			$('input[name="actName"]').val(data.actName);
+			$('input[name="actStart"]').val(((new Date(parseInt(data.actStart.time) ).toISOString()).split('T'))[0]);
+			$('input[name="actEnd"]').val(((new Date(parseInt(data.actEnd.time) ).toISOString()).split('T'))[0]);
+			$('area[name="actRemark"]').text(data.actRemark);
+			if(data.actType==1){
+				$('a.editinfo').attr('href','alltime.html?actId='+data.actId);
+				$('a.buyershow').attr('href','index.html?actId='+data.actId);
+				
+			}else{
+				$('a.editinfo').attr('href','parttime.html?actId='+data.actId);
+				$('a.buyershow').attr('href','parttimeindex.html?actId='+data.actId);
+			}
+			if(data.state==1){
+				$('a.pause').text('暂停活动');
+			}else{
+				$('a.pause').text('开始活动');
+			}
+			
+		}
+	}
+	})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html >
+<html manifest="admin.manifest">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no" />
+<title>惠淘无线</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+<link rel="stylesheet" href="../css/iconfont.css" >
+<link rel="stylesheet" href="../css/mycss.min.css" >
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type="text/javascript" src="../js/common.min.js"></script>
+<script src="//g.alicdn.com/tmapp/tida2/2.0.141/tida.js?appkey=23384029"></script>
+</head>
+<body>
+<div class="page page-current external" id="timelimit">
+      <nav class="bar bar-tab">
+        <a class="tab-item active selectcolor tab-font" href="#" external>
+          <span class="icon icon-home"></span>
+          <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item tab-font" href="actionlist.html" external>
+          <span class="icon icon-app"></span>
+          <span class="tab-label">活动</span>
+        </a>
+ 		<a  id="myshop" class="tab-item tab-font" href="#" external >
+          <span class="icon icon-me"></span>
+          <span class="tab-label">我的店铺</span>
+        </a>
+      </nav>
+      <div class="content active" >
+        <!-- 这里是页面内容区 -->
+        <div class="content-padded">
+          <h4 class='titlecolor margin0 margin-top1'>活动创建：</h4>
+          <p class="fontsize7 margin0 margin-top25 contentcolor">以下两种形式适应于新品促销、限时打折、折扣促销、限时优惠券、热卖、聚划算等某个时间段的促销展示及互动，买家可以在一个界面中找到卖家主推商品，并引导买家进行收藏店铺、收藏商品、加入购物车、分享等无线互动，增加店铺粉丝、促进买家购买。</p>
+        <div class="list-block margin0 margin-top1">
+            <ul>
+              <li class="item-content item-link">
+                
+                <div class="item-inner marginleft04 alltime">
+                  <div class="item-title indexbranch titlecolor ">全时段限时抢购</div>
+                  <div class="item-after fontsize7 flexshrink1 contentcolor " >适应于某段时间活动展示，适应于聚划算、折扣促销、店铺活动、5折促销等。</div>
+                </div>
+                
+              </li>
+              <li class="item-content item-link">
+               
+                <div class="item-inner marginleft04 parttime">
+                  <div class="item-title indexbranch ">分时段限时抢购</div>
+                  <div class=" item-after fontsize7 flexshrink1 contentcolor ">适应于某个时间段进行限时抢购展示，造成时间紧迫感，促进买家购买。</div>
+                </div>
+              </li>
+            </ul>
+            <!-- <div class='row'>
+            	<div class='col-33 fontsize75 textcenter'>浏览量<div>111</div></div>
+            	<div class='col-33 fontsize75 textcenter'>收藏数<div>111</div></div>
+            	<div class='col-33 fontsize75 textcenter'>分享数<div>111</div></div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+<!--调试引用-->
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+
+<script type="text/javascript" src="../js/apitoserver.min.js"></script>
+<script>                	
+   				  
+   				$(document).ready(function(){
+   				     $(".alltime").on('click',function(){window.location.href="alltime.html"});
+   				     $(".parttime").on('click',function(){window.location.href="parttime.html"});
+                     serverAPI.getUserInfo({}, function(result){
+                           if(typeof(result)!=undefined){
+                               var userInfo=JSON.parse(result);
+	                           var shopSid=userInfo.shopSid;
+	                           sessionStorage.setItem('shopSid',shopSid);
+	                           $("#myshop").on('click',function(){window.location.href="https://shop"+shopSid+".taobao.com"});
+                           }
+                           
+                     });
+                     $(document).on('dbclick','body',function(){
+                     	sessionStorage.setItem('testflag',1);
+                     })
+   				})
+ </script>
+</body>
+</html>

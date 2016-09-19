@@ -1,0 +1,2105 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线-分时段限时抢购</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+<link rel="stylesheet" href="../css/iconfont.css" >
+<link rel="stylesheet" href="../css/mycss.min.css" >
+<link rel="stylesheet" href="../css/sui.css" >
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script src="//g.alicdn.com/tmapp/tida2/2.0.141/tida.js?appkey=23384029"></script>
+<script type="text/javascript" src="../js/common.min.js"></script>
+<style>.picker-items{font-size:0.9rem;}</style>
+</head>
+
+<body>
+ <div class="page-group">
+<div class="page page-current" id='parttime' external>
+    
+      <nav class="bar bar-tab">
+        <a class="tab-item active selectcolor tab-font back " >
+          <span class="icon icon-left"></span>
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item tab-font saveandrec" href="#" external>
+          <span class="icon sui-icon icon-touch-arrow-down-circle"></span>
+          <span class="tab-label">保存</span>
+        </a>
+ 		<a class="tab-item tab-font saveandrec torecommend" href="#" external >
+          <span class=" icon sui-icon icon-touch-association2"></span>
+          <span class="tab-label">保存并推广</span>
+        </a>
+      </nav>
+	<div class="content" data-type='native'>
+    <div class=" list-block content-inner" >
+    <form method='post'>
+
+    <ul>
+      <li class="backgroundeee"> <div class="item-content"><div class="item-inner"><div class="item-title label">活动设置</div></div></div></li>
+      <!-- Text inputs -->
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动名称</div>
+            <div class="item-input">
+              <input type="text" name='actName' placeholder="活动名称">
+              <input type="hidden" name='actId' >
+            </div>
+            <div class='item-after tipscolor actName'></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-email"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">开始时间</div>
+            <div class="item-input">
+              <input type="text" name='actStart' placeholder="开始时间" class='setstarttime'>
+            </div>
+            <div class='item-after tipscolor actStart'></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束时间</div>
+            <div class="item-input">
+              <input type="text" name='actEnd'  placeholder="结束时间" class='setendtime'>
+            </div>
+            <div class='item-after tipscolor actEnd'></div>
+          </div>
+        </div>
+      </li>
+      <li class="align-top">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-comment"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动备注</div>
+            <div class="item-input">
+              <textarea name="actRemark"></textarea>
+              <div class='fontsize55'>限制50个字符内。</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+     <li class="backgroundeee">
+     <div class="descinfo">
+     	<div class="label titlecolor">奖项设置</div>
+     	<p class=' contentcolor'>建议卖家设置流量赠送，促进用户通过领取流量的方式促进成交。建议最多只设置3种类型，供买家选择</p>
+     </div>
+     </li>
+      <li>
+        <div class="item-content ifshowdiscount" >
+          <div class="item-media"><i class="icon icon-form-gender"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">是否展示赠流量</div>
+            <div class="item-input">
+
+              <label class="label-switch">
+                <input type="checkbox"  name='couponShow'>
+                <div class="checkbox"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </li>
+    
+      <li>
+        <div class="item-content getop1">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">领取条件</div>
+            <div class="item-input">
+             <select name='couponReceivingConditions'>
+                <option value=1 >收藏店铺</option>
+                
+              </select>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="item-content getop1">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">流量设置</div>
+            <div class="item-input item-link">
+            <a href='' class="selectflowlink">请设置</a>
+            <input type="hidden" name='coupons' />
+             
+            </div>
+          </div>
+        </div>
+      </li>
+	  <script>
+      $(".getop1").hide();
+	  var s=$(".getop1")
+	 
+      $(".ifshowdiscount [name='couponShow']").on('change',function(){
+		
+		  if($(this).prop('checked')){
+			
+			 	$(".getop1").css('display','')
+			  }else{
+				   $(".getop1").css('display','none')
+
+				  }
+		  });
+	 $('[name="coupons"]').on('change',function(){
+	 	var val=$(this).val()
+	 	val=val.split(',')
+	 	var s;
+	 	if(val.length==1){
+	 		s='请选择'
+	 	}else{
+	 		s=val[0]+'M/次,'+val[1]+'次/人,'+'共'+val[2]+'次';
+	 	}
+	 	$('.selectflowlink').html(s)
+	 })  
+
+      </script>
+     <li class="backgroundeee">
+     <div class="descinfo">
+     	<div class="label titlecolor">宝贝设置</div>
+     	<p class=' contentcolor'>建议限时抢购只设置7天以内，防止买家抢购疲劳，下次活动可以重新设置。</p>
+     </div>
+     </li>
+     <li>
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-name"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">活动banner</div>
+            <div class="item-input">
+              <input type="text" name='banner' placeholder="非必填，可以使用默认banner">
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="backgroundeee">
+     	<div class="item-content">
+        	<div class="item-inner">
+            	
+                <div class="item-input"><a href="#" class="button button-fill addnewtimeinterval">新增时间段</a></div>
+            </div>
+        </div>
+     </li>
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">限抢时间段</div>
+            <div class="item-input">
+              <input type="text" name='activityDetail[0].startTime' id='datetime-picker'/>
+  			  <input type="hidden" name='activityDetail[0].actDetailId'/>
+            </div>
+            <div class='item-after tipscolor activityDetail0startTime'></div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">主推宝贝</div>
+            <div class="item-input">
+             <a  id='a-0'  class="goodstopop">已选择0件宝贝</a><!-- javascript:localhref(0) -->
+             <input type='hidden' value='' name='activityDetail[0].activityGoodDetailList'>
+            </div>
+            <div class='item-after tipscolor goodsnum activityDetail0activityGoodDetailList'></div>
+          </div>
+        </div>
+      </li>
+      <!-- <li class="timeintervalli li">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束控制</div>
+            <div class="item-input">
+             <select>
+                <option>按截止时间到达</option>
+                <option>手动调整</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li> -->
+    </ul>
+    </form>
+    <script src="../js/picker.min.js" type='text/javascript' charset='utf-8'></script>
+  </div>
+  
+  </div>
+ </div>
+
+<div class="popup popup-goods"  >
+
+      <nav class="bar bar-tab">
+        <a class="tab-item active selectcolor tab-font bartab1 close-popup "  >
+         
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item tab-font sgoods-select-all  bartab1" href="javascript:void()" external>
+         
+          <span class="tab-label">全选</span>
+        </a>
+ 		<a class="tab-item tab-font bartab1 delrecgoods" href="javascript:void()" external >
+         
+          <span class="tab-label">取消展示</span>
+        </a>
+        <a class="tab-item active selectcolor tab-font bartab2 close-popup "  >
+         
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item tab-font goods-select-all bartab2 " href="javascript:void()" external>
+         
+          <span class="tab-label">全选</span>
+        </a>
+ 		<a class="tab-item tab-font bartab2 addrecgoods" href="javascript:void()"  external >
+         
+          <span class="tab-label">添加展示</span>
+        </a>
+      </nav>
+      <div class="content-block margin0 padding0">
+  <div class="buttons-tab backgroundzindex">
+    <a href="#tab1" class="tab-link active button">已选择</a>
+    <a href="#tab2" class="tab-link  button">出售中</a>
+    
+  </div>
+  <div class="content-block margin0padding0 ">
+    <div class="tabs">
+      <div id="tab1" class="tab active tab1">
+        <div class="content margin0padding0">
+          
+          <div class="list-block goods-list media-list ">
+            <ul >
+             
+       			<li><div class="item-inner "><p><center>还有添加活动商品哦，请到出售中列表添加。</center></p></div></li>
+             
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="tab2" class="tab   tab2">
+        <div class="content-block margin0padding0 " >
+        
+
+<div class="content   infinite-scroll pull-to-refresh-content" data-distance="60">
+        <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+        </div>
+                  <div class="bar bar-header-secondary">
+          <div class="searchbar">
+            <a class="searchbar-cancel">取消</a>
+            <div class="search-input">
+              <label class="icon icon-search" for="search"></label>
+              <input type="search" id='search' placeholder='输入关键字...'/>
+            </div>
+          </div>
+        </div>
+      <div class="list-block media-list marginbottom0">
+
+
+          <ul class="goods-list list-container">
+
+                <li><div class="item-inner "><p><center>请下拉刷新</center></p></div></li>
+                    </ul>
+
+                  </div>
+                               <div class="infinite-scroll-preloader">
+              <div class="preloader"></div>
+          </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    
+
+<!--调试引用-->
+
+<script type="text/javascript" src="../js/apitoserver.min.js"></script>
+<script type="text/javascript" src="../js/sm-time-picker.min.js"></script>
+<script>
+console.log('343');
+
+$(function(){
+var urlobj=common.urlSearch();
+console.log('347');
+if(urlobj.actId){
+console.log('348');
+var params5={
+		'actId':urlobj.actId
+	}
+var formfeild=['actId','actName','actEnd','actStart','actRemark','banner','couponShow','coupons','couponReceivingConditions','activityDetailList'];
+
+
+$.showIndicator() 
+API.base('/sys/activity!findActivityById.action',params5 , function(rsp){
+$.hideIndicator()
+	console.log('zou1');
+	if(rsp.success==true){
+		var data=rsp.data;
+		if(data.activity){
+			data=data.activity
+			$('.qrcodeurl').attr('src',data.qrcode);
+		}
+	console.log('zou2');	
+		for(var i in data){
+
+			var res=$.inArray(i,formfeild);
+			if(res>-1){
+				if(i!='activityDetailList'){
+					if(i=='couponShow'){
+						$('form [name="'+i+'"]').prop('checked',data[i]==1? true:false)
+					}else if(i!='actEnd'&&i!='actStart'){
+
+						$('form [name="'+i+'"]').val(data[i]);
+					}else if(i=='actEnd'||i=='actStart'){
+
+						$('form [name="'+i+'"]').val(common.getDate(data[i]))
+					}
+				}else if(i=='activityDetailList'){
+					
+					var adldata=data[i];
+					for(var j in adldata){
+		
+						if(j>0){
+
+							$('.addnewtimeinterval').trigger('click');
+						}
+						
+						var cadldate=adldata[j];
+
+						//var gmtimece=((new Date(parseInt(adldata[j].endTime.time)).toISOString()).split('T'))[1];
+						//var gmtimecs=(new Date(parseInt(adldata[j].startTime.time)).toISOString()).replace('T',' ');
+						if(adldata[j].endTime.minutes<10){
+							adldata[j].endTime.minutes='0'+adldata[j].endTime.minutes;
+						}			
+						var endtimec=adldata[j].endTime.hours+":"+adldata[j].endTime.minutes;
+						var starttimec=common.getDate(adldata[j].startTime);
+
+						$('form [name="activityDetail['+j+'].startTime"]').val(starttimec+'--'+endtimec);
+						$('form [name="activityDetail['+j+'].actDetailId"]').val(cadldate.actDetailId);
+						$('form [name="activityDetail['+j+'].activityGoodDetailList"]').val(JSON.stringify(cadldate.activityGoodDetailList));
+						$('#a-'+j).html('已选择'+cadldate.activityGoodDetailList.length+'件宝贝');						
+						
+					}
+				}
+			}
+		}
+		 $(".ifshowdiscount [name='couponShow']").trigger('change');
+		 var starttarr=$(".setstarttime").val().replace(/\-|\:/g,' ').split(' ');
+		 var endtarr=$(".setendtime").val().replace(/\-|\:/g,' ').split(' ');
+		 var datetimepickerarr=$("#datetime-picker").val().replace(/\-+|\:/g,' ').split(' ');
+		 $(".setstarttime").datetimePicker({
+	      value:starttarr
+	    });
+		$(".setendtime").datetimePicker({
+	      value: endtarr
+	    });
+	    $("#datetime-picker").datetimePickerDuan({
+	      value: datetimepickerarr
+	    });
+	    $('[name="coupons"]').trigger('change')
+	}else{
+		common.errorhandler(rsp.msg)
+	}
+	});
+
+}else{
+	$(".setstarttime").datetimePicker({
+      value: getDateArr().slice(0,5)
+    });
+	$(".setendtime").datetimePicker({
+      value: getDateArr(7).slice(0,5)
+    });
+    $("#datetime-picker").datetimePickerDuan({
+      value: getDateArr()
+    });
+}
+
+
+
+
+//保存并推广js
+
+         serverAPI.getUserInfo({}, function(result){
+               if(typeof(result)!=undefined){
+                   var userInfo=JSON.parse(result);
+                var shopSid=userInfo.shopSid;
+                $("#myshop").on('click',function(){window.location.href="https://shop"+shopSid+".taobao.com"});
+               }
+         });
+         
+          $("#registerActivity").on('click',function(){
+          			  var curenttxt=$(this).text();
+						var state,aurl;
+						if(curenttxt=='取消同步'){
+							state=2
+							aurl='/sys/items!unRegisterActivity.action'
+						}else{
+							state=1
+							aurl='/sys/items!registerActivity.action'
+						}
+                      var actId=$('form [name="actId"]').val();
+                      if(actId==undefined || actId==""){
+                          $.toast("活动不存在");
+                          return ;
+                      }
+                      var actStart=$('form [name="actStart"]').val();
+                      var actEnd=$('form [name="actEnd"]').val();
+                      var actRemark=$('form [name="actRemark"]').val();
+                      var actName=$('form [name="actName"]').val();
+                      var params7
+                      if(state==1){
+            			params7={
+				                        'entryUrl':common.URL+'/index.html?actId='+actId
+				                       ,'bizId':actId
+				                       ,'description':actRemark
+				                       ,'name':actName
+				                       ,'picture':"../images/logo_shop_activity.png"
+				                       ,'hasValidTime':'hasValidTime'
+				                       ,'endTime':actEnd+':00'
+				                       ,'startTime':actStart+':00'
+				                       ,'actId':actId
+				               }		          
+                      }else{
+                      	params7={
+                      		'bizId':''
+                      		,'actId':actId
+                      	}
+                      }
+					//发布到店铺
+					API.base(aurl, params7, function(rsp){
+					common.consolelogfn(rsp)
+					console.log(rsp);
+					    if(rsp!=undefined && rsp.data!=undefined && rsp.data.allspartResult!=undefined ){
+					    	//{"allspartResult":{"data":null,"errCode":"INTERNAL_ERROR","errMsg":"活动类型不存在","success":false}};
+					        if( rsp.data.allspartResult.errMsg!=undefined){
+					          $.toast(rsp.data.allspartResult.errMsg);
+					        }else{
+					          if(rsp.data.allspartResult.data!=undefined){
+					              if(thisobjt.text()=='取消同步'){
+					              		$.toast("取消同步成功");
+										thisobjt.text('同步到店铺');
+									}else{
+										$.toast("店铺同步成功");
+										thisobjt.text('取消同步');
+									}
+					          }
+					        }
+					        
+					        
+					    }else{
+					       common.errorhandler(rsp.msg)
+					        $.toast("授权实效，请重新登陆");
+					    }
+					});
+               });
+               
+               
+               $("#feedWeiTao").on('click',function(){
+                           var actId=$('form [name="actId"]').val();
+                           if(actId==undefined || actId==""){
+                               $.toast("活动不存在");
+                                return ;
+                           }
+                           var actStart=$('form [name="actStart"]').val();
+                           var actEnd=$('form [name="actEnd"]').val();
+                           var actRemark=$('form [name="actRemark"]').val();
+                           var actName=$('form [name="actName"]').val();
+                           var banner=$('form [name="banner"]').val();
+                            var params8={
+                               'coverPath':common.URL+banner
+                              ,'detailUrl':common.URL+'index.html?actId='+actId
+                              ,'title':actName
+                              ,'summary':actRemark
+                              ,'startTime':actStart+':00'
+                              ,'endTime':actEnd+':00'
+                              ,'bizId':actId
+                      }
+		//发布到店铺
+		API.base('/sys/items!feedWeiTao.action', params8, function(rsp){
+			
+			if(rsp!=undefined && rsp.data!=undefined && rsp.data.message!=undefined &&rsp.data.message.msg!=undefined){
+			    $.toast(rsp.data.message.msg);
+			}
+		});
+       });
+       $('.copy-button').on('click',function(){
+       	
+       		window.prompt("复制到粘贴板: 长按复制, 确定", $('[name=sharepage]').val());
+       		
+       });
+       $(".popup-setflow input").on('focus',function(){
+			$(this)[0].select();
+		})
+})
+$('.delrecgoods').on('click',function(){
+		var tobj=$('.tab1 .goods-list input[type=checkbox]')
+		
+		var gettrue=[];
+		for(var i=0,l=tobj.length;i<l;i++){
+		
+			if($(tobj[i]).prop('checked')==true){
+				gettrue.push(tobj[i].value);
+			}
+		}
+
+		var seedgoodslist=[];
+        if(gettrue.length==0){
+        	$.toast("请先选择商品！");
+        }
+        
+        var cindex=sessionStorage.getItem('edititem');
+        var recdata=JSON.parse(sessionStorage.getItem('edititemval'));
+        
+		var actId=$('form [name="actId"]').val();
+		var eactDetailId=sessionStorage.getItem('eactDetailId');
+		for(var i in recdata){
+			var cobj={
+                 "actDetailId": "", 
+                 "activityPrice": "", 
+                 "currentNum": "", 
+                 "detailUrl": "", 
+                 "isSaleOut": "", 
+                 "oldNum": "", 
+                 "overWay": "", 
+                 "pic_url": "", 
+                 "price": "", 
+                 "title": "", 
+                 "type": "1", 
+                 "useroperation": "delete"
+             }
+			var tmpcobj=recdata[i]
+			var numiid=tmpcobj.numIid;
+		
+			var res=$.inArray(''+numiid,gettrue);
+			
+			if(res>-1){
+				cobj.numiid=numIid;
+				cobj.id=tmpcobj.id;
+				cobj.actDetailId=eactDetailId;
+				cobj.activityPrice=tmpcobj.price;
+				cobj.price=tmpcobj.price;
+				cobj.title=tmpcobj.title;
+				cobj.pic_url=tmpcobj.picUrl;
+				cobj.oldNum=tmpcobj.num;
+				if(!tmpcobj.id){
+					cobj.useroperation= "";
+				}
+				seedgoodslist.push(cobj);
+			}
+			
+		}
+
+
+		var params2={"activity": {
+			    "actId": actId, 
+			    "activityDetailList": [
+			        {
+			            "actDetailId": eactDetailId, 
+			            "actId": actId, 
+			            "activityGoodDetailList": [
+			               
+			            ], 
+			            
+			            "useroperation": ""
+			        }
+			    ], 
+			   
+			    "useroperation": ''
+			}
+			}
+		if(eactDetailId!=''){
+			Array.prototype.push.apply(params2.activity.activityDetailList[0].activityGoodDetailList, seedgoodslist);  
+			API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(params2)} , function(rsp){
+
+				console.log(rsp);
+				if(rsp.success==true){
+					
+					successupdom();
+				}else{
+					$.toast(rsp.message);
+				}
+			})
+		}else{
+			successupdom();
+		}
+		
+		
+	var successupdom=function(){
+		
+		var selgoods=sessionStorage.getItem('edititemval');
+		firstgoodsflag=0;
+		selgoods=JSON.parse(selgoods);
+		for(var i in selgoods){
+			var dres=$.inArray(''+(selgoods[i].numiid),gettrue);
+			if(dres>-1){
+        			selgoods.splice(i,1);
+        		}
+		}
+		$("#a-"+cindex).html('已选择'+selgoods.length+'件宝贝')
+		sessionStorage.setItem('edititemval',JSON.stringify(selgoods));
+		$("input[name='activityDetail["+cindex+"].activityGoodDetailList']").val(JSON.stringify(selgoods));
+		$.toast("操作成功");
+	}
+})
+
+	
+
+	
+	
+	$('.addrecgoods').on('click',function(){
+		//var inputobj=$('.tab2 .goods-list input[checked=true]');
+		var tobj=$('.tab2 .goods-list input[type=checkbox]')
+		
+		var gettrue=[];
+		for(var i=0,l=tobj.length;i<l;i++){
+			if($(tobj[i]).prop('checked')==true){
+				gettrue.push(tobj[i].value);
+			}
+		}
+
+		var seedgoodslist=[];
+        if(gettrue.length==0){
+        	$.toast("请先选择商品！");
+        	return
+        }
+        console.log('gettrue',gettrue);
+        var cid=sessionStorage.getItem('edititem');
+        var havesel=sessionStorage.getItem('edititemval');
+        console.log('havesel',havesel);
+        if(havesel!=''){
+        	havesel=JSON.parse(havesel);
+        	for(var i in havesel){
+        		var nid=havesel[i].numiid;
+        		var hres=$.inArray(''+nid,gettrue);
+        		if(hres>-1){
+        			gettrue.splice(hres,1);
+        		}
+        	}
+        }
+		console.log('gettrue',gettrue);
+		if(gettrue.length>0){
+		
+		
+			for(var i in gdata){
+				var cobj={
+					 "numiid":"",
+	                 "actDetailId": "", 
+	                 "activityPrice": "", 
+	                 "currentNum": "", 
+	                 "detailUrl": "", 
+	                 "isSaleOut": "", 
+	                 "oldNum": "", 
+	                 "overWay": "", 
+	                 "pic_url": "", 
+	                 "price": "", 
+	                 "title": "", 
+	                 "type": "1", 
+	                 "useroperation": "add"
+	             }
+				var tmpcobj=gdata[i]
+				var numiid=tmpcobj.numIid;
+				
+				var res=$.inArray(''+numiid,gettrue);
+
+				if(res>-1){
+					cobj.numiid=tmpcobj.numIid;
+					cobj.activityPrice=tmpcobj.price;
+					cobj.price=tmpcobj.price;
+					cobj.title=tmpcobj.title;
+					cobj.pic_url=tmpcobj.picUrl;
+					cobj.oldNum=tmpcobj.num;
+					seedgoodslist.push(cobj);
+				}
+				
+			}
+	
+		}
+		
+		if(havesel!=''){
+			Array.prototype.push.apply(seedgoodslist, havesel);  
+		}
+		
+		$("#a-"+cid).html('已选择'+seedgoodslist.length+'件宝贝')
+		
+		$("input[name='activityDetail["+cid+"].activityGoodDetailList']").val(JSON.stringify(seedgoodslist));
+		sessionStorage.setItem('edititem',cid);
+       	sessionStorage.setItem('eactDetailId',$("input[name='activityDetail["+cid+"].actDetailId']").val());
+       	sessionStorage.setItem('edititemval',JSON.stringify(seedgoodslist));
+		$.toast("添加成功");
+		firstgoodsflag=0;
+		
+	})
+	$('.bartab2').hide();
+	$('.tab-link').on('click',function(e){
+
+	var vherf=$(this).attr('href');
+	if(vherf=='#tab1'){
+		$('.bartab1').css('display','table-cell');
+		$('.bartab2').hide();
+	}else{
+		$('.bartab2').css('display','table-cell');
+		$('.bartab1').hide();
+	}
+	});
+	$('.goods-select-all').on('click',function(){
+		var inputobj=$('.tab2 .goods-list input[type=checkbox]');
+
+		if(inputobj.prop("checked")==true){
+			inputobj.prop("checked",'');
+			$(this).find('span').html('全选')
+		}else{
+			inputobj.prop('checked','true');
+			$(this).find('span').html('取消全选')
+		}
+	})
+	$('.sgoods-select-all').on('click',function(){
+		var inputobj=$('.tab1 .goods-list input[type=checkbox]');
+
+		if(inputobj.prop("checked")==true){
+			inputobj.prop("checked",'');
+			$(this).find('span').html('全选')
+		}else{
+			inputobj.attr('checked',true);
+			$(this).find('span').html('取消全选')
+		}
+	})
+	  var gdata=[];
+	  var loading = false;
+      // 最多可加载的条目
+      var maxItems = 100;
+
+      // 每次加载添加多少条目
+      var itemsPerLoad = 10;
+      var curpagenum = 1;
+      	$(document).on('opened','.popup-goods',function(){
+ 		$.init();
+		$('.pull-to-refresh-content').scroller();  //注意滚动条一定要最先初始化
+
+        $.initPullToRefresh($('.pull-to-refresh-content'));
+        $.initInfiniteScroll($('.pull-to-refresh-content'));
+		$.attachInfiniteScroll($('.infinite-scroll'))
+		$.initPullToRefresh($('.pull-to-refresh-content'))
+ 	  
+	$(document).on('refresh', '.pull-to-refresh-content',function(e) {
+    // 模拟2s的加载过程
+    setTimeout(function() {
+     var upobj=$(e.target).find('.goods-list');
+     		  var html = '';
+     		  var q=$('#search').val();
+              var params1={
+					'pageSize':itemsPerLoad,
+					'pageNo':1,
+					'q':q,
+					 fields:'approve_status,num_iid,title,nick,type,cid,pic_url,num,props,valid_thru,list_time,price,has_discount,has_invoice,has_warranty,has_showcase,modified,delist_time,postage_id,seller_cids,outer_id,sold_quantity' 
+				}
+				API.base('/sys/items!searchItemOnsale.action', params1, function(rsp){
+				
+				if(rsp.success==true){
+				    curpagenum=2;
+					var data=rsp.data;
+					var totalr=data.total_results;
+					var gitems=data.items;
+					var nowlen=gitems.length;
+					maxItems=totalr;
+
+					var timec=new Date().valueOf()
+					for(var i=0;i<nowlen;i++){
+						
+					 	var downtime=gitems[i].listTime.time+604800000
+					 	var havetime=downtime-timec;
+					 	var hday=Math.floor(havetime/86400000);
+					 	var hhours=Math.floor((havetime-hday*86400000)/3600000)
+					 	var hminuts=Math.floor((havetime-hday*86400000-hhours*3600000)/60000)
+					 	var hsecond=Math.round((havetime/1000)%60,0)
+					 	var timestr='离下架'+hday+'天'+hhours+'小时'+hminuts+'分'+hsecond+'秒';
+			 			html += '<li>'+
+			                '<label class="label-checkbox item-content ">'+
+			                 ' <input type="checkbox" name="numiid" value='+gitems[i].numIid+'>'+
+			                  '<div class="item-media"><i class="icon icon-form-checkbox"></i></div>'+
+			                  '<div class="item-inner marginleft0">'+
+			                   ' <ul class="margin0padding0 list-block">'+
+			                   ' <li>'+
+			                    '    <a href="#" class="item-link item-content">'+
+			                     ' <div class="item-media"><img src="'+gitems[i].picUrl+'" style="width: 4rem;"></div>'+
+			                      '<div class="item-inner noline">'+
+			                       ' <div class="item-title-row">'+
+			                        '  <div class="item-title"></div>'+
+			                         ' <div class="item-after tipinfo">库存：'+gitems[i].num+'</div>'+
+			                        '</div>'+
+			                       ' <div class="item-text">'+gitems[i].title+'</div>'+
+			                        '<div class="item-subtitle "></div>'+
+			                        '<div class="item-title-row">'+
+			                         ' <div class="item-title redcolor">￥'+gitems[i].price+'</div>'+
+			                          '<div class="item-after fontsize5">'+timestr+'</div>'+
+			                        '</div>'+
+			                      '</div>'+
+			                    '</a>'+
+			                  '</li>'+
+			                    '</ul>'+
+			                  '</div>'+
+			                '</label>'+
+			              '</li>';
+					}
+					upobj.html(html);
+					for(var k in gitems){
+						for(var m in gdata){
+							if(gitems[k].numIid==gdata[m].numIid){
+								gitems.splice(k,1)
+							}
+						}
+					}
+					Array.prototype.push.apply(gdata, gitems);  
+				}else{
+					common.errorhandler(rsp.msg)
+					//$.toast("请求服务器超时！");
+					//location.href="http://huitao.ews.m.jaeapp.com/";
+				}
+			});
+      
+        // 加载完毕需要重置
+        lastIndex = $('.goods-list>li').length;
+       
+		$.pullToRefreshDone('.pull-to-refresh-content');
+		$.attachInfiniteScroll($('.infinite-scroll'))
+		$(".infinite-scroll-preloader").show();
+        loading = false;
+    }, 1000);
+});
+
+		addItems(itemsPerLoad, 0);
+		
+		
+	})
+
+
+
+	
+      function addItems(number, lastIndexc) {
+              // 生成新条目的HTML
+              var html = '';
+              var params1={
+					'pageSize':itemsPerLoad,
+					'pageNo':curpagenum,
+					 fields:'approve_status,num_iid,title,nick,type,cid,pic_url,num,props,valid_thru,list_time,price,has_discount,has_invoice,has_warranty,has_showcase,modified,delist_time,postage_id,seller_cids,outer_id,sold_quantity' 
+				}
+				API.base('/sys/items!searchItemOnsale.action', params1, function(rsp){
+			
+				if(rsp.success==true){
+				    curpagenum++;
+				   
+					var data=rsp.data;
+					var totalr=data.total_results;
+					var gitems=data.items;
+					maxItems=totalr;
+					ctotalr=gitems.length;
+
+					var timec=new Date().valueOf()
+					for(var i=0;i<ctotalr;i++){
+						
+					
+					 	var downtime=gitems[i].listTime.time+604800000
+					 	
+					 	var havetime=downtime-timec;
+					
+					 	var hday=Math.floor(havetime/86400000);
+					 	var hhours=Math.floor((havetime-hday*86400000)/3600000)
+					 	var hminuts=Math.floor((havetime-hday*86400000-hhours*3600000)/60000)
+					 	var hsecond=Math.round((havetime/1000)%60,0)
+					 	var timestr='离下架'+hday+'天'+hhours+'小时'+hminuts+'分'+hsecond+'秒';
+			 			html += '<li>'+
+			                '<label class="label-checkbox item-content ">'+
+			                 ' <input type="checkbox" name="numiid" value='+gitems[i].numIid+'>'+
+			                  '<div class="item-media"><i class="icon icon-form-checkbox"></i></div>'+
+			                  '<div class="item-inner marginleft0">'+
+			                   ' <ul class="margin0padding0 list-block">'+
+			                   ' <li>'+
+			                    '    <a href="#" class="item-link item-content">'+
+			                     ' <div class="item-media"><img src="'+gitems[i].picUrl+'" style="width: 4rem;"></div>'+
+			                      '<div class="item-inner noline">'+
+			                       ' <div class="item-title-row">'+
+			                        '  <div class="item-title"></div>'+
+			                         ' <div class="item-after tipinfo">库存：'+gitems[i].num+'</div>'+
+			                        '</div>'+
+			                       ' <div class="item-text">'+gitems[i].title+'</div>'+
+			                        '<div class="item-subtitle "></div>'+
+			                        '<div class="item-title-row">'+
+			                         ' <div class="item-title redcolor">￥'+gitems[i].price+'</div>'+
+			                          '<div class="item-after fontsize5">'+timestr+'</div>'+
+			                        '</div>'+
+			                      '</div>'+
+			                    '</a>'+
+			                  '</li>'+
+			                    '</ul>'+
+			                  '</div>'+
+			                '</label>'+
+			              '</li>';
+					}
+					for(var k in gitems){
+						for(var m in gdata){
+							if(gitems[k].numIid==gdata[m].numIid){
+								gitems.splice(k,1)
+							}
+						}
+					}
+					Array.prototype.push.apply(gdata, gitems);  
+					if(lastIndexc==0){
+						$('.pull-to-refresh-content .goods-list').html(html);
+					}else{
+						$('.pull-to-refresh-content .goods-list').append(html);
+					}
+					 
+				}else{
+				common.errorhandler(rsp.msg)
+				//$.toast("请求服务器超时！");
+				}
+				lastIndex = $('.goods-list>li').length;
+				loading = false;
+				$.refreshScroller();
+			});
+              
+              
+
+          }
+          
+      
+
+      // 上次加载的序号
+
+      var lastIndex = 10;
+
+      // 注册'infinite'事件处理函数
+      $(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+          // 如果正在加载，则退出
+          if (loading) return;
+
+          // 设置flag
+          loading = true;
+
+          // 模拟1s的加载过程
+          setTimeout(function() {
+              // 重置加载flag
+              
+
+              if (lastIndex >= maxItems) {
+                  // 加载完毕，则注销无限加载事件，以防不必要的加载
+                  $.detachInfiniteScroll($('.infinite-scroll'));
+                  // 删除加载提示符
+                  $('.infinite-scroll-preloader').remove();
+                  return;
+              }
+
+              // 添加新条目
+			  
+              addItems(itemsPerLoad, lastIndex);
+              // 更新最后加载的序号
+
+          }, 1000);
+      });
+      $('.tab-link[href="#tab2"]').one('click',function(){
+        $.init();
+		$.attachInfiniteScroll($('.infinite-scroll'))
+
+		addItems(itemsPerLoad, 0);
+      })
+    
+	
+
+	
+</script>
+ </div>   
+<textarea class="saveaddtime"><li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-password"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">限抢时间段</div>
+            <div class="item-input">
+              <input type="text" name='activityDetail[0].startTime' id='datetime-picker'/>
+				<input type="hidden" name='activityDetail[0].actDetailId'/>	
+					
+                    
+            </div>
+            <div class='item-after tipscolor actName'></div>
+          </div>
+        </div>
+      </li>
+      <li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">主推宝贝</div>
+            <div class="item-input">
+             <a class="goodstopop" id='a-0' >已选择0件宝贝</a>
+            <input type='hidden' value='' name='activityDetail[0].activityGoodDetailList'>
+            </div>
+            <div class='item-after tipscolor goodsnum'></div>
+          </div>
+        </div>
+      </li>
+      <!-- <li class="timeintervalli li1">
+        <div class="item-content">
+          <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+          <div class="item-inner">
+            <div class="item-title label">结束控制</div>
+            <div class="item-input">
+             <select>
+                <option>按截止时间到达</option>
+                <option>手动调整</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </li> --><li  class="timeintervalli li1"><div class="item-content"><div class="item-inner"><div class="item-input"><a href="#" class="button">删除</a></div></div></div></li></textarea>
+<!--调试引用-->
+
+
+
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+
+<script>
+
+$('.addnewtimeinterval').bind('click',function(){
+	var n=($('.timeintervalli').length+1)/3||1;
+	$('.timeintervalli').parent().append($('.saveaddtime').text().replace(/li1/g,'li'+n).replace('datetime-picker','datetime-picker'+n).replace('a-0','a-'+n).replace("activityDetail[0].actDetailId","activityDetail["+n+"].actDetailId").replace("activityDetail[0].activityGoodDetailList","activityDetail["+n+"].activityGoodDetailList").replace('activityDetail0activityGoodDetailList','activityDetail'+n+'activityGoodDetailList').replace("activityDetail[0].startTime","activityDetail["+n+"].startTime").replace("activityDetail0startTime","activityDetail"+n+"startTime"));
+	  
+	$('#datetime-picker'+n).datetimePickerDuan({
+      value: getDateArr()
+    });
+     $(".goodstopop").on('click',  function(e) {
+ 	
+	    firstgoodsflag=0;
+	    $.popup('.popup-goods')
+	    var targeta=e.target
+		var id;
+	    if(/a\-\d+/.test(targeta.id)){
+	    	id=(targeta.id.split('-'))[1];
+	    	sessionStorage.setItem('edititem',id);
+	    	sessionStorage.setItem('eactDetailId',$("input[name='activityDetail["+id+"].actDetailId']").val());
+	    	sessionStorage.setItem('edititemval',$("input[name='activityDetail["+id+"].activityGoodDetailList']").val());
+	    }
+	   if(id){
+    	if(!$("input[name='activityDetail["+id+"].activityGoodDetailList']").val()){
+    	
+	    	$('#tab1').removeClass('active');
+	    	$('#tab2').addClass('active');
+	    	$('a[href="#tab1"]').removeClass('active');
+	    	$('a[href="#tab2"]').addClass('active');
+	    	$('.bartab2').css('display','table-cell');
+			$('.bartab1').hide();
+	
+				
+		    }else{
+		    	firstgoodsflag=0
+		    }
+ 	}
+	 	
+ 	
+ })
+	$('.li'+n).find('.button').bind('click',function(){
+		var getf=$('.'+$(this).parents('li').attr('class').split(' ')[1]).find("[type='hidden']");
+		var actId=$('form [name="actId"]').val();
+		if(actId){
+		
+			var delobj={
+				            "actDetailId": '', 
+				            "actId":actId, 
+				            "activityGoodDetailList": [
+				               
+				            ], 
+				            
+				            "useroperation": "delete"
+				        }
+			for(var i=0,l=getf.length;i<l;i++){
+				var name=getf[i].name;
+				name=(name.split('.'))[1];
+				
+				if(name=='actDetailId'){
+					delobj.actDetailId=getf[i].value;
+				}else if(name=='activityGoodDetailList'){
+					var glist=JSON.parse(getf[i].value)
+					for(var j in glist){
+						glist[j].useroperation='delete'
+					}
+					delobj.activityGoodDetailList=glist;
+				}
+			}
+			delobj=[delobj]
+			var olddellist=sessionStorage.getItem('dellist')
+			olddellist=JSON.parse(olddellist);
+			if(olddellist){
+				Array.prototype.push.apply(delobj,olddellist)
+			}
+			sessionStorage.setItem('dellist',JSON.stringify(delobj));
+		}
+		$('.'+$(this).parents('li').attr('class').split(' ')[1]).remove();
+		
+		});
+	})
+
+	
+	var obj={"activity": {
+    "actEnd": '', 
+    "actId": '', 
+    "actName": '', 
+    "actRemark": '', 
+    "actStart": '', 
+    "actType": 2, 
+    "activityDetailList": [
+
+    ], 
+    "banner": 1, 
+    "couponReceivingConditions": 1, 
+    "couponShow": 1, 
+    "coupons": 1, 
+    "sellerNick": '小叮当_淘淘', 
+    "state": 2, 
+    "useroperation": 'add'
+}
+}
+//获取form
+var form=$('form').first()[0];
+
+//key:con,concon:'>0'检查字段条件大于0
+var checkfield=[{'key':'actName','check':[{'key':'require','tips':'不能为空'}]},
+				{'key':'actStart','check':[{'key':'require','tips':'不能为空'},{'key':'reg','regcon':'^\\d{4}(\/|\-)\\d{2}(\/|\-)\\d{2}\\s{1}([0-9]|(1[0-9])|(2[0-3]))\:[0-5]{1}[0-9]{1}$','tips':'格式不正确'},{'key':'comparetime','con':">=today",'tips':"不能小于当前日期",'when':'add'}]},
+				{'key':'actEnd','check':[{'key':'require','tips':'不能为空'},{'key':'reg','regcon':'^\\d{4}(\/|\-)\\d{2}(\/|\-)\\d{2}\\s{1}([0-9]|(1[0-9])|(2[0-3]))\:[0-5]{1}[0-9]{1}$','tips':'格式不正确'},{'key':'comparetime','con':">=key:actStart",'tips':"不能小于开始日期"}]},
+				{'key':'actRemark','check':[{'key':'len',lencon:'<50','tips':'不能为空'}]},
+				{'key':"'activityDetail[0]\.startTime'",'check':[{'key':'comparetime','con':'>=key:actStart','tips':"不能小于开始时间"},{'key':'comparetime','con':'<key:actEnd','tips':"不能大于结束时间"}]},
+				{'key':"'activityDetail[0]\.activityGoodDetailList'",'check':[{'key':'require','tips':'请选择商品'}]}				];
+
+$.each(checkfield,function(index,item){
+	var iname=item['key'];
+	var checka=item['check'] 
+	$('[name='+iname+']').on('change  blur',function(){
+		var thisobj = $(this)[0];
+		checkitem(iname,checka,thisobj);
+	})
+})
+//保存活动
+	$('.saveandrec').on('click',function(){
+		var form=$('form')[0]||{};
+		if(form){
+		var cons=true;
+		$.each(checkfield,function(index,item){
+			var iname=item['key'];
+			var checka=item['check'] 
+			var thisobj = $('[name='+iname+']')[0]||$('[name='+iname+']');
+		
+			res=checkitem(iname,checka,thisobj);
+			if(res==false){
+				cons=false
+			}
+		})
+
+		
+		if(cons==false) return;
+			var actId= $('[name="actId"]').val();
+			var activityDetail=[],activityDetailList=[]
+			$.each(form,function(index,item){
+				
+				if(item['name']){
+					
+					if(/activityDetail\[/.test(item['name'])){
+						var namesplit=item['name'].split('.');
+						var rez=/\[(\d)\]/;
+						var getzr=item['name'].match(rez)
+						var arrindex=getzr[1];
+						if(namesplit[1]=='startTime'){
+							activityDetailList[arrindex]={}
+							var tmp=item['value'];
+							var tmparr=tmp.split(' ');
+							
+							var tmparrtime=tmparr[1].split('--');
+							
+							var startTime=tmparr[0]+' '+tmparrtime[0]+':00';
+							
+							var endTime=tmparr[0]+' '+tmparrtime[1]+':00';
+							activityDetailList[arrindex].startTime=startTime;
+							activityDetailList[arrindex].endTime=endTime;
+							
+							
+							activityDetailList[arrindex].actId=actId;
+							
+						}else if(namesplit[1]=='activityGoodDetailList'){
+							if(!activityDetailList[arrindex].activityGoodDetailList)activityDetailList[arrindex].activityGoodDetailList=[];
+							
+							Array.prototype.push.apply(activityDetailList[arrindex].activityGoodDetailList,JSON.parse(item['value']))
+						}else if(namesplit[1]=='actDetailId'){
+							if(item['value']){
+								activityDetailList[arrindex].useroperation="update";
+							}else{
+								activityDetailList[arrindex].useroperation="add";
+							}
+							
+							activityDetailList[arrindex].actDetailId=item['value'];
+						}
+				
+						
+						
+						
+					}else{
+					
+						if(item['name']=='actEnd'||item['name']=='actStart'){
+						
+							var ds=(new Date(item['value'].replace(/-/g,'/'))).Format("yyyy-MM-dd hh:mm:ss")
+							
+							obj['activity'][item['name']]=ds;
+						}else if(item['name']=='couponShow'){
+							obj['activity'][item['name']]=item['checked']? 1:0;
+						}else{
+						obj['activity'][item['name']]=item['value'];
+						}
+					
+						
+					}
+					
+				}
+			});
+			var dellist=sessionStorage.getItem('dellist')
+			
+			if(dellist){
+			dellist=JSON.parse(dellist)
+			Array.prototype.push.apply(activityDetailList,dellist);
+			}
+			obj['activity'].activityDetailList=activityDetailList;
+			
+			if(obj['activity'].actId!=''){
+				obj['activity'].useroperation='update';
+			}
+			thisobj=$(this)
+			$.showPreloader('提交中')
+			API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(obj)} , function(rsp){
+			console.log(rsp);
+			$.hidePreloader();
+				if(rsp.success){
+					$.toast("操作成功");
+					sessionStorage.setItem('dellist','');
+					var urlobj=common.urlSearch();
+					if(!urlobj.actId){
+					if(rsp.data!=undefined && rsp.data.activity!=undefined &&rsp.data.activity.actId!=undefined ){
+
+						var tactivity=rsp.data.activity
+						tactivity=tactivity.activityDetailList;
+						for(var i=0,l=tactivity.length;i<l;i++){
+							$('form [name="activityDetail['+i+'].actDetailId"]').val(tactivity[i].actDetailId);
+						}
+			   			 $('form [name="actId"]').val(''+rsp.data.activity.actId);
+						 var stateObject = {};
+					 	 var title = "";
+					 	 var urlarr=document.URL.split('#')
+					 	 var newUrl = urlarr[0]+'?actId='+ rsp.data.activity.actId+'#'+urlarr[1];
+					 	
+					 	 history.pushState(stateObject,title,newUrl);
+					} 
+							
+					}
+					var data=rsp.data;if(data) data=data.activity; if(data)  data=data.actId;
+					 $('[name=sharepage]').val(common.URL+'/index.html?actId='+data); 
+					if(thisobj.hasClass('torecommend')){
+					if(rsp.data&&rsp.data.activity.qrcode){
+						$('.qrcodeurl').attr('src',rsp.data.activity.qrcode);
+					}
+						if(rsp.data.activity.state==1){
+								$('#registerActivity').text('取消同步');
+							}else{
+								$('#registerActivity').text('同步到店铺');
+							}
+						//$.router.load("#recommend");
+						$.popup('.popup-recommend')
+						
+					}
+					
+				}else{
+					common.errorhandler(rsp.msg)
+					//$.toast(rsp.message);
+				}
+				
+			})
+		}
+		
+	});
+	
+function checkitem(iname,checka,thisobj){
+	var tipstxt='';
+	$.each(checka,function(index,itemc){
+		if(itemc['key']=='require'){
+			if(thisobj.value!=''){
+				
+			}else{
+				tipstxt=itemc['tips'];
+			}
+		}
+		if(itemc['key']=='reg'){
+			var   re =new RegExp(itemc['regcon']);
+			
+			if(thisobj.value!=''&&re.test(thisobj.value)){
+			
+			}else{
+				tipstxt=itemc['tips'];
+			}
+		}
+		if(itemc['key']=='len')	{
+			var lens=common.GetLength(thisobj.value);
+			news=lens+itemc['lencon']
+			l=(new Function('return '+news))()
+			
+			if(l){
+			
+			}else{
+				
+				thisobj.value=common.cSubString(thisobj.value,50);
+			}
+			
+		}
+		if(itemc['key']=='con'){
+		
+			var v=thisobj.value;
+
+			var cv=itemc['concon'];
+			cv=v+cv;
+			cr=(new Function('return '+cv))()
+			if(cr){
+			
+			}else{
+				tipstxt=itemc['tips'];
+			}
+		}
+		if(itemc['key']=='comparetime'){
+				if(itemc['when']){
+					if(itemc['when']=='add'){
+						var urlobj=common.urlSearch();
+						if(urlobj.actId){
+							return true;
+						}
+					}
+				}
+				var v=thisobj.value;
+				v=v.split('--')[0];
+				var con=itemc['con'];
+				var getcon=con.match(/[\w\[\]\.\']+\:?[\w\[\]\.\']+/g)
+				if(getcon[0]=='today'){
+					var now=new Date(),nyear=now.getFullYear(),nmonth=now.getMonth()+1,nday=now.getDate();
+					var timestr=Date.parse(nmonth+"/"+ nday+"/"+nyear);
+					console.log('now='+now);
+					console.log('now='+nmonth+" "+ nday+" "+nyear);
+					console.log('timestr='+timestr);
+					con=con.replace(/[a-z]+/,timestr);
+				}else if(/\:/.test(getcon[0])){
+					var getkey=getcon[0].split(":")
+					var keyval=$('[name='+getkey[1]+']').val();
+					if(/\:/.test(keyval)){
+						keyval=keyval+':00'
+						keyval=keyval.replace(/-/g,'/')
+					}
+					if(!keyval){
+						tipstxt=itemc['tips'];
+					}else{
+						var startdate=new Date(keyval),nyear=startdate.getFullYear(),nmonth=startdate.getMonth()+1,nday=startdate.getDate();
+						var timestr=Date.parse(nmonth+"/"+ nday+"/"+nyear);
+						con=con.replace(/[\w\[\]\.\']+\:?[\w\[\]\.\']+/g,timestr);
+					}
+				}
+				if(!tipstxt){
+				
+					console.log('v='+v);
+					if(/\:/.test(v)){
+						v=v+':00';
+						v=v.replace(/-/g,'/')
+					}
+					
+					console.log('-----------'+v+new Date(v));
+					var s=Date.parse(new Date(v));
+					s=s+con;
+					console.log('**--**********************');
+					console.log(s);
+					var cr=(new Function('return '+s))()
+					if(cr){
+						
+					}else{
+						tipstxt=itemc['tips'];
+					}
+				} 
+				
+			}
+		
+
+	})
+
+	$('.'+iname.replace(/'|\[|\]|\./g,'')).text(tipstxt)
+	if(tipstxt==''){
+	return true
+	}else{
+	return false
+	}
+}	
+
+
+
+</script>
+
+
+<div class="popup popup-recommend" >
+     <!--  <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back" href="/demos/card" data-transition='slide-out'>
+          <span class="icon icon-left"></span>
+          返回
+        </a>
+        <a class="button button-link button-nav pull-right" href="/demos/card" data-transition='slide-out'>
+          <span class="icon iconfont icon-close"></span>
+        </a>
+        <a class="button button-link button-nav pull-right" href="/demos/card" data-transition='slide-out'>
+          <span class="icon icon-refresh"></span>  
+        </a>
+     
+        <h1 class="title">保存并推广</h1>
+      </header> -->
+
+      <div class="content">
+      <div class="content-padded" >
+        <!-- 这里是页面内容区 -->
+		<div class='row'>
+	  		<div class='col-80'><h4 class="padding1rem">同步到店铺</h4></div>
+	  		<div class='col-20 textright'><a href="#" class="close-popup "><span class="icon iconfont icon-close"></span></a></div>
+	  	</div>
+  		
+        <p class="padding1rem">将会同步到手机店铺中</p>
+        <p><a href="#" id="registerActivity" class="button button-fill button-warning">同步到店铺</a></p>
+		<h4  class="padding1rem">推送到微淘</h4>
+        <p  class="padding1rem">将会把活动推送到微淘</p>
+        <p class="padding1rem"><a href="#" id="feedWeiTao" class="button button-fill button-warning">推送到微淘</a></p>
+		<h4 class="padding1rem">活动链接</h4>
+        <p  class="padding1rem">你可以复制，放入你的店铺装修中</p>
+		<div class="list-block">
+            <ul>
+              <!-- Text inputs -->
+              <li>
+                <div class="item-content">
+                  <div class="item-media"><i class="icon icon-form-name"></i></div>
+                  <div class="item-inner">
+                    <div class="item-input">
+                      <input type="text" name='sharepage' placeholder="推广地址">
+                    </div>
+                     <div class="item-title label"><a href="#" class="copy-button button button-success  bgff6600">复制</a></div>
+                  </div>
+                </div>
+              </li>
+          </ul>
+       </div>
+       <h4 class="padding1rem">活动二维码</h4>
+        <p  class="padding1rem">你可以复制，进行自定义推广</p>
+        <p class='textcenter'><img src='' class='qrcodeurl' /></p>
+      </div>
+      </div>
+    </div>
+ <div class="popup popup-banner">
+     <div class="list-group">
+      <ul>
+         <li class="list-group-title">请选择活动banner</li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo1.png"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo2.png"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo3.png"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo4.png"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo5.jpg"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo6.png"></div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo7.png"></div>
+            </div>
+          </div>
+         
+        </li>
+                <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo9.png"></div>
+            </div>
+          </div>
+         
+        </li>
+                <li>
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title"><img data-src="../images/logo/logo10.jpg"></div>
+            </div>
+          </div>
+         
+        </li>
+        <p class='textcenter content-padded'> <a href="#" class="close-popup button">取消</a></p>
+      </ul>
+      
+    </div>
+  </div>
+ <div class="popup popup-setflow">
+ 
+          <h4 class="descinfo margin0 margin-top1">流量设置</h4>
+           <div class="list-block margin0 margin-top25">
+                <ul>
+                  <!-- Text inputs -->
+                                    <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-name"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">每人领取流量（M）</div>
+                        <div class="item-input">
+                          <input type="number" name='perperson' placeholder="每人领取流量" >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-email"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">每人领取次数</div>
+                        <div class="item-input">
+                          <input type="number" name='persontime'  placeholder="每人领取次数"  >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">领取总次数限制</div>
+                        <div class="item-input">
+                          <input type="number" name='flowalltime'   placeholder="领取总次数限制" >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            
+                
+              </div>
+               <div class="content-block">
+					    <div class="row">
+					      <div class="col-50"><a href="#" class="button button-big button-fill button-danger close-popup">返回</a></div>
+					      <div class="col-50"><a href="#" class="button button-big button-fill button-success flowpopupsave">保存</a></div>
+					    </div>
+			  </div>         
+        
+       
+  </div>
+</div>
+</body>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+
+<script type="text/javascript" src="../js/sm-city-picker.js" charset='utf-8'></script>
+</html>
+<script>
+ $("input[name=banner]").on('click',function(){
+ 	$.popup('.popup-banner')
+ 	console.log('123123');
+ 	$('.popup-banner img').each(function(index){
+       $(this).attr('src',$(this).data('src'))
+    })
+ });
+  $("a.selectflowlink").on('click',function(){
+  	var userinfo=sessionStorage.getItem('userInfo');
+  	userinfo=JSON.parse(userinfo);
+  	var params7={
+		'userNick':userinfo.sellerNick
+	}
+	API.base('/sys/items!walletSign.action', params7, function(rsp){
+		var data=rsp.data;
+		if(data){
+			if(data.value=="true"){
+			$.popup('.popup-setflow')
+			var val=$('[name="coupons"]').val();
+			val=val.split(',');
+			if(val.length>0){
+				$("[name='perperson']").val(val[0]);
+ 				$("[name='persontime']").val(val[1]);
+ 			   	$("[name='flowalltime']").val(val[2]);
+			}
+			
+			}else if(data.value=="false"){
+				alert('你还没有开通流量钱包！正在跳转到开通页面')
+				window.location.href='https://partner.aliqin.tmall.com/?spm=0.0.0.0.vtfmlu';
+			}	
+		}else{
+			//alert(JSON.stringify(rsp));
+			common.errorhandler(rsp.msg)
+		}
+	});
+ 	
+ 	console.log('123123');
+ });
+ $('.flowpopupsave').on('click',function(){
+ 	
+ 	var perperson=$("[name='perperson']").val();
+ 	var persontime=$("[name='persontime']").val();
+ 	var flowalltime=$("[name='flowalltime']").val();
+ 	if(perperson>0&&persontime>0&&flowalltime>0&&parseInt(flowalltime)>parseInt(persontime)){
+
+ 		 	var s=perperson+'M/次,'+persontime+'次/人,'+'共'+flowalltime+'次';
+		 	$('.selectflowlink').html(s);
+		 	$("[name='coupons']").val(perperson+','+persontime+','+flowalltime)
+		 	$.toast('设置成功！');
+ 	}else{
+ 		$.alert('必须是大于0的数字,总次数大于每人限定次数', '验证提示!');
+ 	}
+
+ })
+$(".popup-banner li").on('click',function(){
+	 	$("input[name=banner]").val($(this).find('img').attr('src'));
+	 	$.closeModal('.popup-banner')
+	 	
+	 })
+
+var firstgoodsflag=1;
+function checkgoodsstatu(){
+
+	
+	
+
+
+			if(firstgoodsflag==1)return;
+			firstgoodsflag=1;
+			
+			var selgoods=sessionStorage.getItem('edititemval');
+			var onehtml='';
+			if(selgoods!=''){
+			
+				
+				var valobj=JSON.parse(selgoods)
+			
+				$.each(valobj,function(bindex,bitem){
+					if(typeof bitem.limitNum=='undefined') bitem.limitNum=''
+					onehtml+= '<li>'+
+                '<label class="label-checkbox item-content">'+
+                 ' <input type="checkbox" name="numiid" value="'+bitem.numIid+'" >'+
+                  '<div class="item-media"><i class="icon icon-form-checkbox"></i></div>'+
+                  '<div class="item-inner marginleft0">'+
+                   ' <ul class="margin0padding0 list-block ">'+
+                    '                    <li>'+
+                        '<a href="#" class=" item-content">'+
+                      '<div class="item-media"><input type="hidden" name="id" value="'+(bitem.id ? bitem.id:'' )+'"><img src="'+bitem.pic_url+'" style="width: 4rem;"></div>'+
+                      '<div class="item-inner">'+
+                        '<div class="item-title-row">'+
+                         ' <div class="item-title"></div>'+
+                          '<div class="item-after fontsize75">库存：'+bitem.oldNum+'</div>'+
+                        '</div>'+
+                        
+                       ' <div class="item-text">'+bitem.title+'</div>'+
+                        '<div class="item-subtitle redcolor">￥'+bitem.price+'</div>'+
+                      '</div>'+
+                    '</a>'+
+                  '</li>'+
+                  '<li class="item-content">'+
+                   ' <div class="item-media"><i class="icon icon-f7"></i></div>'+
+                    '<div class="item-inner displaycss">'+
+                     ' <div class="item-title label">商品原价</div>'+
+                      '<div class="item-input"><input type="number" name="originalPrice" value="'+bitem.originalPrice+'" placeholder="商品原价"></div>'+
+                    '</div>'+
+                  '</li>'+
+                  '<li class="item-content">'+
+                   ' <div class="item-media"><i class="icon icon-f7"></i></div>'+
+                    '<div class="item-inner displaycss">'+
+                     ' <div class="item-title label">折扣价格</div>'+
+                      '<div class="item-input"><input type="number" name="activityPrice" value="'+bitem.activityPrice+'" placeholder="折扣价格"></div>'+
+                    '</div>'+
+                  '</li>'+
+                  '<li class="item-content">'+
+                   ' <div class="item-media"><i class="icon icon-f7"></i></div>'+
+                    '<div class="item-inner displaycss">'+
+                     ' <div class="item-title label">限购数量</div>'+
+                      '<div class="item-input"><input value="'+bitem.limitNum+'" type="number"  placeholder="1件"></div>'+
+
+                    '</div>'+
+                  '</li>'+
+                  '<li class="item-content">'+
+                   ' <div class="item-media"><i class="icon icon-f7"></i></div>'+
+                    '<div class="item-inner displaycss">'+
+                      
+                      ' <div class="item-title label"></div>'+
+                      '<div class="item-after"><p class="buttons-row"><a href="javascript:void()" class="button active setrecfirst">'+ (bitem.type==1?'取消主推':'设为主推')+'</a><a href="javascript:void()" class="button setsaleout">置成售罄</a><a href="javascript:void()" class="button saverecinfo">保存</a></p></div></p></div>'+
+                    '</div>'+
+                  '</li>'+
+                   ' </ul>'+
+                  '</div>'+
+                '</label>'+
+              '</li>'+
+              ' </ul>'+
+               '   </div>'+
+                '</label>'+
+              '</li>';
+				})
+				$('#tab1 .goods-list ul').html(onehtml);
+				
+				$('#tab1 a.setrecfirst').on('click',function(){
+					
+					var liparent=$(this).parents('li').filter(function(){ if($(this).attr('class')==null) {return true;}})
+					var delid=liparent.find('input[name="id"]').val();
+					var eactDetailId=sessionStorage.getItem('eactDetailId');
+					var actId=$('form [name="actId"]').val();
+					var hcont=$(this).text();
+					
+					var getgoodslist=JSON.parse(sessionStorage.getItem('edititemval'));
+					var opobjtmp='';
+					for(var i in getgoodslist){
+						if(getgoodslist[i].id==delid){
+								opobjtmp=getgoodslist[i];
+							}
+					}
+					var type=1;
+					if(hcont=='取消主推'){
+					type=0;
+					}
+					if(delid){
+							var params2={"activity": {
+								    "actId": actId, 
+								    "activityDetailList": [
+								        {
+								            "actDetailId": eactDetailId, 
+								            "actId": actId, 
+								            "activityGoodDetailList": [
+	
+								            ], 
+								            
+								            "useroperation": ""
+								        }
+								    ], 
+								   
+								    "useroperation": ''
+								}
+								}
+								opobjtmp.actDetailId=eactDetailId; 
+								opobjtmp.id=delid;
+								opobjtmp.type=type;
+								opobjtmp.useroperation="update";
+								params2['activity']['activityDetailList'][0]['activityGoodDetailList'].push(opobjtmp);
+						thisobjt=$(this);
+						API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(params2)} , function(rsp){
+						
+						if(rsp.success){
+							$.toast("操作成功");
+							if(thisobjt.text()=='取消主推'){
+								thisobjt.text('设为主推');
+							}else{
+								thisobjt.text('取消主推');
+							}
+							for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								getgoodslist[i].type=type;
+								getgoodslist[i].useroperation="update";
+							}
+							sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+							var edititem=sessionStorage.getItem('edititem')
+							$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						}
+						}else{
+						
+							$.toast(rsp.message);
+						}
+						
+					})
+				}else{
+						if($(this).text()=='取消主推'){
+							$(this).text('设为主推');
+						}else{
+							$(this).text('取消主推');
+						}
+						for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								getgoodslist[i].type=type;
+								getgoodslist[i].useroperation="update";
+							}
+						}
+						sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+						var edititem=sessionStorage.getItem('edititem')
+						$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						
+				}
+						
+
+				})
+				$('#tab1 a.setsaleout').on('click',function(){
+					
+					var liparent=$(this).parents('li').filter(function(){ if($(this).attr('class')==null) {return true;}})
+					var delid=liparent.find('input[name="id"]').val();
+					var eactDetailId=sessionStorage.getItem('eactDetailId');
+					var actId=$('form [name="actId"]').val();
+					var hcont=$(this).text();
+					var getgoodslist=JSON.parse(sessionStorage.getItem('edititemval'));
+					var opobjtmp='';
+					for(var i in getgoodslist){
+						if(getgoodslist[i].id==delid){
+								opobjtmp=getgoodslist[i];
+							}
+					}
+					var isSaleOut=0;
+					if(hcont=='置成售罄'){
+					isSaleOut=1;
+					}
+					if(actId){
+							var params2={"activity": {
+								    "actId": actId, 
+								    "activityDetailList": [
+								        {
+								            "actDetailId": eactDetailId, 
+								            "actId": actId, 
+								            "activityGoodDetailList": [
+								              
+								            ], 
+								            
+								            "useroperation": ""
+								        }
+								    ], 
+								   
+								    "useroperation": ''
+								}
+								}
+						opobjtmp.actDetailId=eactDetailId; 
+						opobjtmp.id=delid;
+						opobjtmp.isSaleOut=isSaleOut;
+						opobjtmp.useroperation="update";
+						params2['activity']['activityDetailList'][0]['activityGoodDetailList'].push(opobjtmp);
+						thisobjt=$(this);
+						API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(params2)} , function(rsp){
+						
+						if(rsp.success){
+							$.toast("操作成功");
+							if(thisobjt.text()=='置成售罄'){
+								thisobjt.text('取消售罄');
+							}else{
+								thisobjt.text('置成售罄');
+							}
+							for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								getgoodslist[i].isSaleOut=isSaleOut;
+								getgoodslist[i].useroperation="update";
+							}
+							sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+							var edititem=sessionStorage.getItem('edititem')
+							$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						}
+						}else{
+						
+							$.toast(rsp.message);
+						}
+						
+					})
+				}else{
+						if($(this).text()=='置成售罄'){
+							$(this).text('取消售罄');
+						}else{
+							$(this).text('置成售罄');
+						}
+						for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								getgoodslist[i].isSaleOut=isSaleOut;
+								getgoodslist[i].useroperation="update";
+							}
+						}
+						sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+						var edititem=sessionStorage.getItem('edititem')
+						$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						
+				}
+						
+
+				})
+					$('#tab1 a.saverecinfo').on('click',function(){
+					
+					var liparent=$(this).parents('li').filter(function(){ if($(this).attr('class')==null) {return true;}})
+					var delid=liparent.find('input[name="id"]').val();
+					var originalPrice=liparent.find('input[name="originalPrice"]').val();
+					var activityPrice=liparent.find('input[name="activityPrice"]').val();
+					var eactDetailId=sessionStorage.getItem('eactDetailId');
+					var actId=$('form [name="actId"]').val();
+					var hcont=$(this).text();
+					var getgoodslist=JSON.parse(sessionStorage.getItem('edititemval'));
+					var opobjtmp='';
+					for(var i in getgoodslist){
+						if(getgoodslist[i].id==delid){
+								opobjtmp=getgoodslist[i];
+							}
+					}
+
+					var isSaleOut=0;
+					
+					if(delid){
+							var params2={"activity": {
+								    "actId": actId, 
+								    "activityDetailList": [
+								        {
+								            "actDetailId": eactDetailId, 
+								            "actId": actId, 
+								            "activityGoodDetailList": [
+								               {
+								                "actDetailId": eactDetailId, 
+								               	'id':delid,
+								               	'originalPrice':originalPrice,
+								               	'activityPrice':activityPrice,
+								               	"useroperation": ""
+								               }
+								            ], 
+								            
+								            "useroperation": ""
+								        }
+								    ], 
+								   
+								    "useroperation": ''
+								}
+								}
+						opobjtmp.actDetailId=eactDetailId; 
+						opobjtmp.id=delid;
+						opobjtmp.originalPrice=originalPrice;
+						opobjtmp.activityPrice=activityPrice;
+						opobjtmp.useroperation="update";
+						params2['activity']['activityDetailList'][0]['activityGoodDetailList'].push(opobjtmp);
+						thisobjt=$(this);
+						API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(params2)} , function(rsp){
+						
+						if(rsp.success){
+							$.toast("保存成功");
+							
+							
+							for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								
+								getgoodslist[i].originalPrice=originalPrice;               	
+								getgoodslist[i].activityPrice=activityPrice;
+								getgoodslist[i].useroperation="update";
+							}
+							sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+							var edititem=sessionStorage.getItem('edititem')
+							$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						}
+						}else{
+						
+							$.toast(rsp.message);
+						}
+						
+					})
+				}else{
+
+						for(var i in getgoodslist){
+							if(getgoodslist[i].id==delid){
+								if(getgoodslist[i].id==delid){
+								
+								getgoodslist[i].originalPrice=originalPrice;               	
+								getgoodslist[i].activityPrice=activityPrice;
+								getgoodslist[i].useroperation="update";
+							}
+							}
+						}
+						sessionStorage.setItem('edititemval',JSON.stringify(getgoodslist));
+						var edititem=sessionStorage.getItem('edititem')
+						$("input[name='activityDetail["+edititem+"].activityGoodDetailList']").val(JSON.stringify(getgoodslist));
+						
+				}
+						
+
+				})
+			}else{
+				$('#tab1 .goods-list ul').html("<li><div class='item-inner '><p><center>还有添加活动商品哦，请到出售中列表添加。</center></p></div></li>");
+			}
+			
+		
+		
+	
+}
+function timego(){
+    checkgoodsstatu()
+    
+    window.setTimeout(timego,600)
+    }
+timego()
+
+     $(".goodstopop").on('click',  function(e) {
+ 	
+	    firstgoodsflag=0;
+	    $.popup('.popup-goods')
+	    var targeta=e.target
+		var id;
+	    if(/a\-\d+/.test(targeta.id)){
+	    	id=(targeta.id.split('-'))[1];
+	    	sessionStorage.setItem('edititem',id);
+	    	sessionStorage.setItem('eactDetailId',$("input[name='activityDetail["+id+"].actDetailId']").val());
+	    	sessionStorage.setItem('edititemval',$("input[name='activityDetail["+id+"].activityGoodDetailList']").val());
+	    }
+	   if(id){
+    	if(!$("input[name='activityDetail["+id+"].activityGoodDetailList']").val()){
+    	
+	    	$('#tab1').removeClass('active');
+	    	$('#tab2').addClass('active');
+	    	$('a[href="#tab1"]').removeClass('active');
+	    	$('a[href="#tab2"]').addClass('active');
+	    	$('.bartab2').css('display','table-cell');
+			$('.bartab1').hide();
+	
+				
+		    }else{
+		    	firstgoodsflag=0
+		    }
+ 	}
+	 	
+ 	
+ })
+    </script>

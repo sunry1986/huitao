@@ -1,0 +1,143 @@
+<!DOCTYPE html >
+<html manifest="index.manifest">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="../css/index.css" >
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+
+
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+<link rel="stylesheet" href="../css/iconfont.css" >
+
+
+</head>
+<body>
+<div class="page page-current external" >
+
+      <div class="content active " >
+      	<div class='ldbg'>
+      	
+
+      	<div class='ldbgpan'>
+      		<a href='' class='activeinfobt'>活动详情</a>
+      		<img src="../images/j_zhen.png" width='100' class='ldj_zhen'>
+      	</div>
+      	<div class='ldinfo'>
+      	<div class='ldtimes'>
+      		你还有<span>1</span>次抽奖机会
+      	</div>
+      	<div>
+      		<a>我的中奖纪录</a>
+      	</div>
+      	</div>
+      	<div class='ldlist'>
+      		<h4>获奖名单：</h4>
+      		 <div class=" margin0 ldgetlist">
+    
+		      <ul>
+		        
+		        <li>
+		          <div class="item-content">
+		            <div class="item-inner">
+		              <div class="item-title">麦****间  获得了一等奖</div>
+		            </div>
+		          </div>
+		        </li>
+		        <li>
+		          <div class="item-content">
+		            <div class="item-inner">
+		              <div class="item-title">麦****间  获得了一等奖</div>
+		            </div>
+		          </div>
+		        </li>
+		        </ul>
+		        </div>
+      	</div>
+      	</div>
+		
+		
+      </div>
+    </div>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+<script src="//g.alicdn.com/tmapp/tida2/2.0.141/tida.js?appkey=23384029"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+
+<script>
+$(function(){
+	var swidth=$('.ldbg').width();
+	var sheight=(swidth*230)/640;
+	$('.ldbg').css('padding-top',sheight/20+'rem');
+	$('.ldbgpan').height($('.ldbgpan').width());
+	
+	var st;
+	$('.ldbgpan').css("visibility","visible");
+
+		var obj=$('.ldj_zhen');
+			var i=1,all=0,time1=0,time1,now,jp;
+		function t(){
+
+		
+		time1=(1.01-Math.sin(i/100))*100
+		if(i==314){
+			jp=parseInt(Math.random()*(6)+1);	
+		}
+		if(time1<30){
+			time1=30;
+			css1={'transform':'rotate('+(i*25)+'deg)','-webkit-transform':'rotate('+(i*25)+'deg)','transition':'all '+time1/100+'s linear'}
+		}else{
+			css1={'transform':'rotate('+(i*25)+'deg)','-webkit-transform':'rotate('+(i*25)+'deg)','transition':'all '+time1/100+'s linear'}
+		}
+	
+			obj.css(css1)
+			
+			
+		
+		st=setTimeout(t,time1)
+		if(i>314){
+			time1=100;
+			
+			now=(i*25)%360;
+			console.log(now,jp,((jp-1)*60)<now ,(jp*60)>now);
+			
+			if(((jp-1)*60)<now && (jp*60)>now){
+			setTimeout(function(){$.alert('抽完了', function(){
+				obj.css({'transform':'rotate(-4deg)','transition':'none'})
+			})},1000)
+				clearTimeout(st);
+				return;
+			}
+		}
+		i++;	
+
+
+		}
+
+		
+	$('.ldj_zhen').on('click',function(){
+		i=1;
+		t();
+	})
+	var a=[]
+	Tida.draw(function(s){
+	  alert(JSON.stringify(s))
+    // 伪代码 假设有个array类型变量为drawResultList 存储只为展示用
+    a.push(result);
+    alert(JSON.stringify(s))
+});
+})
+</script>
+</body>
+</html>

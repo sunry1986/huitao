@@ -1,0 +1,255 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+<link rel="stylesheet" href="../icon/css/font.css" >
+<link rel="stylesheet" href="../css/mycss.min.css" >
+<link rel="stylesheet" href="../css/iconfont.css" >
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+<script src="//g.alicdn.com/tmapp/tida2/2.0.141/tida.js?appkey=23384029"></script>
+<script type="text/javascript" src="../js/common.min.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="page page-current " id="actiondetail">
+
+      <nav class="bar bar-tab">
+        <a class="tab-item  tab-font" href="actionlist.html" external>
+          <span class="icon icon-left"></span>
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item active selectcolor tab-font" href="actionlist.html" external>
+          <span class="icon icon-app"></span>
+          <span class="tab-label">活动</span>
+        </a>
+ 		<a id="myshop" class="tab-item tab-font" href="" external >
+          <span class="icon icon-me"></span>
+          <span class="tab-label">我的店铺</span>
+        </a>
+      </nav>
+      <div class="content active" >
+        <!-- 这里是页面内容区 -->
+        <div class="">
+          <h4 class="descinfo margin0 margin-top1">活动设置</h4>
+           <div class="list-block margin0 margin-top25">
+                <ul>
+                  <!-- Text inputs -->
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-name"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">活动名称</div>
+                        <div class="item-input">
+                          <input type="text" name='actName' placeholder="活动名称" readonly>
+                          <input type="hidden" name='actId' >
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-email"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">开始时间</div>
+                        <div class="item-input">
+                          <input type="text" name='actStart' data-toggle='date' placeholder="开始时间" readonly class='setstarttime'>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-password"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">结束时间</div>
+                        <div class="item-input">
+                          <input type="text" name='actEnd' data-toggle='date' readonly placeholder="结束时间" class='setendtime'>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <li class="align-top">
+                    <div class="item-content">
+                      <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                      <div class="item-inner">
+                        <div class="item-title label">活动备注</div>
+                        <div class="item-input">
+                          <textarea name="actRemark" readonly></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+            
+                <div class="row marginupdown paddingrl075"><div class="col-33"><a href="#" class="padding0 button button-fill fontsize085 buyershow">买家端预览 </a></div><div class="col-33"><a href="#" class="padding0 button button-fill  pause fontsize085">同步到店铺</a></div><div class="col-33"><!-- <a href="#" class="button button-fill fontsize085">活动推广</a> --><a href="#" class="button button-fill editinfo fontsize085" external>修改活动</a></div></div>
+                <div class="row paddingrl075"><div class="col-33"><a href="#" class="open-qrcode padding0 button button-fill   fontsize085 ">查看二维码</a></div><div class="col-33"><!-- <a href="#" class="button button-fill fontsize085">活动数据 </a> --></div></div>
+              </div>
+                        
+        
+        </div>
+      </div>
+        
+    </div>
+
+<div class="popup popup-qrcode">
+  <div class="content-block margin0">
+  	<div class='row'>
+  		<div class='col-80'><h5 class='titleqrcode'></h5></div>
+  		<div class='col-20'><p class='textright'><a href="#" class="close-popup "><span class="icon iconfont icon-close"></span></a></p></div>
+  	</div>
+  	
+    
+    
+    <p class='textcenter'><img src='' class='qrcodeurl' /></p>
+  </div>
+</div>
+<!--调试引用-->
+
+
+
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js' charset='utf-8'></script>
+<script type="text/javascript" src="../js/sm-time-picker.js"></script>
+<script type="text/javascript" src="../js/sm-city-picker.js" charset='utf-8'></script>
+<script type="text/javascript" src="../js/apitoserver.min.js"></script>
+<script type="text/javascript">
+$(function(){
+var urlobj=common.urlSearch();
+var params5={
+		'actId':urlobj.actId
+	}
+//单个活动查询
+$.showIndicator() 
+var getfulldata;
+API.base('/sys/activity!findActivityById.action',params5 , function(rsp){
+	console.log(rsp);
+	$.hideIndicator()
+	if(rsp.success==true){
+		var data=rsp.data;
+		if(data.activity){
+			
+			data=data.activity;
+			
+			getfulldata=data;
+			
+			$('input[name="actId"]').val(data.actId);
+			$('input[name="actName"]').val(data.actName);
+			
+			
+			$('input[name="actStart"]').val(common.getDate(data.actStart));
+			
+			$('input[name="actEnd"]').val(common.getDate(data.actEnd));
+			$('textarea[name="actRemark"]').text(data.actRemark);
+			
+			if(data.actType==1){
+				$('a.editinfo').attr('href','alltime.html?actId='+data.actId);
+				$('a.buyershow').attr('href','index.html?actId='+data.actId);
+				
+			}else{
+				$('a.editinfo').attr('href','parttime.html?actId='+data.actId);
+				$('a.buyershow').attr('href','parttimeindex.html?actId='+data.actId);
+			}
+			if(data.state==1){
+				$('a.pause').text('取消同步');
+			}else{
+				$('a.pause').text('同步到店铺');
+			}
+			$('.qrcodeurl').attr('src',data.qrcode)
+			$('.titleqrcode').html(data.actName+'二维码')
+			
+		}
+	}else{
+		common.errorhandler(rsp.msg);
+	}
+	})
+$('.open-qrcode').on('click',function(){
+	$.popup('.popup-qrcode')
+})
+$('a.pause').on('click',function(){
+			var curenttxt=$(this).text();
+			var state,aurl;
+			if(curenttxt=='取消同步'){
+				state=2
+				aurl='/sys/items!unRegisterActivity.action'
+			}else{
+				state=1
+				aurl='/sys/items!registerActivity.action'
+			}
+			var actId= $('[name="actId"]').val();
+			
+			
+			//params2['activity']=getfulldata;
+			var thisobjt=$(this)
+			          var actStart=$(' [name="actStart"]').val();
+                      var actEnd=$(' [name="actEnd"]').val();
+                      var actRemark=$(' [name="actRemark"]').val();
+                      var actName=$(' [name="actName"]').val();
+                      var params7;
+                      if(state==1){
+            			params7={
+				                        'entryUrl':common.URL+'/index.html?actId='+actId
+				                       ,'bizId':actId
+				                       ,'description':actRemark
+				                       ,'name':actName
+				                       ,'picture':"../images/logo_shop_activity.png"
+				                       ,'hasValidTime':'hasValidTime'
+				                       ,'endTime':actEnd+':00'
+				                       ,'startTime':actStart+':00'
+				                       ,'actId':actId
+				               }		          
+                      }else{
+                      	params7={
+                      		'bizId':''
+                      		,'actId':actId
+                      	}
+                      }
+			
+          
+		//发布到店铺
+		API.base(aurl, params7, function(rsp){
+		common.consolelogfn(rsp)
+		console.log(rsp);
+		    if(rsp!=undefined && rsp.data!=undefined && rsp.data.allspartResult!=undefined ){
+		        if( rsp.data.allspartResult.errMsg!=undefined){
+		          $.toast(rsp.data.allspartResult.errMsg);
+		        }else{
+		          if(rsp.data.allspartResult.data!=undefined){
+		              
+		              if(thisobjt.text()=='取消同步'){
+		              		$.toast("取消同步成功");
+							thisobjt.text('同步到店铺');
+						}else{
+							$.toast("店铺同步成功");
+							thisobjt.text('取消同步');
+						}
+		              
+		          }
+		        }
+		        
+		        
+		    }else{
+		       common.errorhandler(rsp.msg)
+		        $.toast("授权实效，请重新登陆");
+		    }
+		});
+});
+$('#myshop').on('click',function(){
+	var shopSid=sessionStorage.getItem('shopSid');
+	window.location.href="https://shop"+shopSid+".taobao.com"
+})
+})
+
+</script>
+</body>
+</html>

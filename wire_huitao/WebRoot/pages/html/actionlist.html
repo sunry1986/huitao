@@ -1,0 +1,221 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>惠淘无线</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+<link rel="stylesheet" href="../css/iconfont.css" >
+<link rel="stylesheet" href="../css/mycss.min.css" >
+<script type="text/javascript" src="../js/common.min.js"></script>
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+
+</head>
+
+<body>
+
+<div class="page page-current external" id="">
+
+      <nav class="bar bar-tab">
+        <a class="tab-item  tab-font" href="admin.html" external>
+          <span class="icon icon-left"></span>
+          <span class="tab-label">返回</span>
+        </a>
+        <a class="tab-item  active selectcolor tab-font" href="#" external>
+          <span class="icon icon-app"></span>
+          <span class="tab-label">活动</span>
+        </a>
+ 		<a id="myshop"  class="tab-item tab-font" href="#" external >
+          <span class="icon icon-me"></span>
+          <span class="tab-label">我的店铺</span>
+        </a>
+      </nav>
+      <div class="content active" >
+        <!-- 这里是页面内容区 -->
+        <div class="content-padded">
+          <h4 class='margin0 margin-top1'>活动列表</h4>
+         </div> 
+         <div class="content-padded">
+            <div class="row  margin0 margin-top25 padding0 no-gutter">
+              <div class="col-33"><a href="admin.html" class="button button-fill button-success fontsize085">创建活动</a></div>
+              
+            </div>
+            </div>
+            <div class="list-block media-list margin0">
+		    <ul class='activitislist'>
+		    
+		    </ul>
+		    
+		    </div>
+
+          <p class='nullshow content-padded'>您的活动列表为空哦，还不赶快去创建活动，创建活动并进行推广后，能够忙您提高店铺粉丝互动及转化！</p>
+        
+        
+      </div>
+    </div>
+    
+
+<!--调试引用-->
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+
+
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+</body>
+</html>
+<script type="text/javascript" src="../js/apitoserver.js"></script>
+<script>
+
+$(document).ready(function(){
+                    //店铺信息获取
+                    $.showIndicator() ;
+   				    serverAPI.getUserInfo({}, function(result){
+                           if(typeof(result)!=undefined){
+                               var userInfo=JSON.parse(result);
+	                           var shopSid=userInfo.shopSid;
+	                           $("#myshop").on('click',function(){window.location.href="https://shop"+shopSid+".taobao.com"});
+                           }
+                     });
+                  
+                  var params6={
+				  };
+					//活动list
+					API.base('/sys/activity!findActivitiesList.action',{data:JSON.stringify(params6)} , function(rsp){
+						console.log(rsp);
+						$.hideIndicator();
+						if(rsp.success==true){
+							var data=rsp.data;
+							if(data) data=data.activitisList;
+							var html='';
+							var stateinfo,classadd,link;
+							for(var i=0,l=data.length;i<l;i++){
+								if(data[i].state==1){
+									stateinfo='进行中';
+									classadd='colorgoing';
+								}else{
+									stateinfo='已结束';
+									classadd='colorend';
+								}
+								var qlink,editlink;
+								if(data[i].actType==1){
+									link='actiondetail.html?actId='+data[i].actId;
+									qlink=common.URL+'index.html?actId='+data[i].actId;
+									editlink=common.URL+'alltime.html?actId='+data[i].actId;
+								}else{
+									link='actiondetail.html?actId='+data[i].actId;
+									qlink=common.URL+'parttimeindex.html?actId='+data[i].actId;
+									editlink=common.URL+'parttime.html?actId='+data[i].actId;
+								}
+
+								var sactEnd,sactStart,checkdelete='',year,month;
+								
+
+								if(data[i].actEnd){
+									if(data[i].actEnd.year<1000){
+										year=parseInt(data[i].actEnd.year)+1900;
+									}
+									month=parseInt(data[i].actEnd.month)+1
+									sactEnd=year+'-'+month+'-'+data[i].actEnd.date+' '+data[i].actEnd.hours+':'+data[i].actEnd.minutes
+									if(data[i].actEnd.time<(new Date()).valueOf()){
+										stateinfo='已结束';
+										classadd='colorend';
+										checkdelete='';
+									}else{
+
+										if(data[i].state==1) {checkdelete='disabled';}else{ checkdelete='';}
+									}
+								}
+
+								if(data[i].actStart){
+									if(data[i].actStart.year<1000){
+										year=parseInt(data[i].actStart.year)+1900;
+									}
+									month=parseInt(data[i].actStart.month)+1
+									sactStart=year+'-'+month+'-'+data[i].actStart.date+' '+data[i].actStart.hours+':'+data[i].actStart.minutes
+								}
+								
+								/*html+='<div  class="row marginupdown bgfff">'+
+					              '<div class="col-33 color575757 fontsize85"><a href="'+link+'" style="display:block;">'+data[i].actName+'</a></div>'+
+					              '<div class="col-33 '+classadd+' fontsize75"><a href="'+link+'" style="display:block;">'+stateinfo+'</a></div>'+
+					              '<div class="col-33 paddingright1 "><a href="'+qlink+'" class="button button-fill button-normal fontsize55">买家端预览</a></div>'+
+					            '</div>';*/
+					            	html+='<li>'+
+							        '<div  class="item-link item-content">'+
+							          '<div class="item-inner actionlist">'+
+							            '<div class="item-title-row">'+
+							             ' <div class="item-title"><a class="titlecolor" style="display:block;" href="'+link+'">'+data[i].actName+'</a></div>'+
+							            '  <div class="item-after '+classadd+'">'+stateinfo+'</div>'+
+							           ' </div>'+
+							            
+							          '  <div class="item-text"><a class="contentcolor"  style="display:block;" href="'+link+'">活动时间:'+ sactStart+'-'+sactEnd +'</a></div>'+
+							         '   <div class="item-subtitle"><p class="buttons-row margin0"><a href="'+qlink+'" class="button">买家端预览</a><a href="'+editlink+'" class="button ">修改</a><a href="" class="button deletebt '+checkdelete+'" date='+data[i].actId+'>删除</a></p></div>'+
+							        '  </div>'+
+							       ' </div>'+
+							      '</li>';
+					            
+							}
+							if(html){
+								$('.nullshow').hide();
+							}else{
+								$('.nullshow').show();
+							}
+							$('.activitislist').html(html);
+							
+							$('.deletebt').on('click',function(){
+								var params3={"activity": {
+												    "actId":$(this).attr('date'),  
+												    
+												    "useroperation": 'delete'
+												}
+												}
+												var thisobj=$(this)
+								 $.confirm('你确定删除此项?',
+							        function () {
+							         			if(!$(this).hasClass('disabled')){
+												
+												
+												//删除活动
+												API.base('/sys/activity!operationActivity.action',{data:JSON.stringify(params3)} , function(rsp){
+													console.log(rsp);
+													if(rsp.success==true){
+														
+														if(rsp.data.message){
+															$.toast(rsp.data.message);	
+								
+														}
+														if(rsp.data.result=='success'){
+															thisobj.parents('li').remove();
+														}
+													}else{
+														$.toast("删除失败");
+													}
+												})
+												}
+							        },
+							        function () {
+							         		
+
+							        }
+							      );
+
+							})
+						}else{
+						common.errorhandler(rsp.msg)
+						$('.nullshow').show();
+						}
+					});
+                  
+                     
+})
+$('#myshop').on('click',function(){
+	var shopSid=sessionStorage.getItem('shopSid');
+	window.location.href="https://shop"+shopSid+".taobao.com"
+})
+</script>

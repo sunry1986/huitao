@@ -1,0 +1,18 @@
+CACHE MANIFEST
+#version 1
+CACHE:
+parttimeindex.html
+../css/index.min.css
+../js/apitoserver.min.js
+../images/followgetflow.jpg
+../js/common.min.js
+../js/apitoserver.min.js
+http://g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css 
+http://g.alicdn.com/sj/lib/zepto/zepto.min.js 
+http://g.alicdn.com/tmapp/tida2/2.0.141/tida.js?appkey=23384029
+http://g.alicdn.com/mtb/??lib-httpurl/1.3.2/httpurl.js,lib-img/0.2.10/img.js
+../css/iconfont.css 
+../images/123_03.jpg
+http://g.alicdn.com/msui/sm/0.6.2/js/??sm.min.js,sm-extend.min.js
+NETWORK:
+*
